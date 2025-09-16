@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolce Deals - Премиальная мода</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Премиальная мода для мужчин, женщин и детей. Оригинальные товары из бутиков с доставкой по всему миру.">
+    <meta name="keywords" content="премиальная мода, бренды, одежда, обувь, аксессуары, доставка по миру">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛍️</text></svg>">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">DOLCE DEALS</div>
+            <div class="loading-subtitle">Премиальная мода из бутиков</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        <!-- Search Modal -->
+        <div id="searchModal" class="search-modal hidden">
+            <div class="search-modal-content">
+                <div class="search-header">
+                    <button id="closeSearch" class="close-btn">✕</button>
+                    <h3>Поиск товаров</h3>
+                </div>
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" placeholder="Введите название товара, бренд..." class="search-input">
+                    <button id="searchBtn" class="search-btn">🔍</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Filter Modal -->
+        <div id="filterModal" class="filter-modal hidden">
+            <div class="filter-modal-content">
+                <div class="filter-header">
+                    <button id="closeFilter" class="close-btn">✕</button>
+                    <h3>Фильтры</h3>
+                    <button id="clearFilters" class="clear-btn">Очистить</button>
+                </div>
+                <div class="filter-content">
+                    <!-- Бренды -->
+                    <div class="filter-group">
+                        <h4>Бренды</h4>
+                        <div id="brandFilters" class="filter-options"></div>
+                    </div>
+                    
+                    <!-- Цвета -->
+                    <div class="filter-group">
+                        <h4>Цвета</h4>
+                        <div id="colorFilters" class="color-filters"></div>
+                    </div>
+                    
+                    <!-- Размеры -->
+                    <div class="filter-group">
+                        <h4>Размеры</h4>
+                        <div id="sizeFilters" class="size-filters"></div>
+                    </div>
+                    
+                    <!-- Материалы -->
+                    <div class="filter-group">
+                        <h4>Материалы</h4>
+                        <div id="materialFilters" class="filter-options"></div>
+                    </div>
+                    
+                    <!-- Специальные фильтры -->
+                    <div class="filter-group">
+                        <h4>Специальные</h4>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="saleFilter">
+                            <span>Только распродажа</span>
+                        </label>
+                    </div>
+                </div>
+                <button id="applyFilters" class="apply-filters-btn">Применить фильтры</button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="mainContent" class="main-content">
+            <!-- Home Tab -->
+            <div id="homeTab" class="tab-content active">
+                <div class="home-header">
+                    <h1>DOLCE DEALS</h1>
+                    <button id="openSearch" class="search-icon-btn">🔍</button>
+                </div>
+                
+                <!-- Gender Buttons -->
+                <div class="gender-buttons">
+                    <button class="gender-btn" data-gender="men">Мужчинам</button>
+                    <button class="gender-btn" data-gender="women">Женщинам</button>
+                    <button class="gender-btn" data-gender="kids">Детям</button>
+                </div>
+                
+                <!-- Categories Modal -->
+                <div id="categoriesModal" class="categories-modal hidden">
+                    <div class="categories-modal-content">
+                        <div class="categories-header">
+                            <button id="closeCategories" class="close-btn">✕</button>
+                            <h3 id="categoriesTitle">Категории</h3>
+                        </div>
+                        <div id="categoriesList" class="categories-list"></div>
+                    </div>
+                </div>
+                
+                <!-- Info Blocks -->
+                <div class="info-blocks">
+                    <div class="info-block">
+                        <div class="info-icon">✨</div>
+                        <div class="info-text">
+                            <h4>Оригинальные товары</h4>
+                            <p>Мы выкупаем прямо из бутиков</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-icon">🌍</div>
+                        <div class="info-text">
+                            <h4>Доставка по всему миру</h4>
+                            <p>Доставляем во все страны</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="productsTab" class="tab-content">
+                <div class="products-header">
+                    <button id="backBtn" class="back-btn">← Назад</button>
+                    <h2 id="productsTitle">Товары</h2>
+                    <button id="openSearchProducts" class="search-icon-btn">🔍</button>
+                </div>
+                
+                <!-- Sort and Filter -->
+                <div class="products-controls">
+                    <div class="sort-controls">
+                        <select id="sortSelect">
+                            <option value="price-asc">По возрастанию цены</option>
+                            <option value="price-desc">По убыванию цены</option>
+                            <option value="name">По названию</option>
+                            <option value="brand">По бренду</option>
+                        </select>
+                    </div>
+                    <button id="openFilters" class="filters-btn">Фильтры</button>
+                </div>
+                
+                <!-- Active Filters -->
+                <div id="activeFilters" class="active-filters hidden"></div>
+                
+                <!-- Products Grid -->
+                <div id="productsGrid" class="products-grid"></div>
+                
+                <!-- Load More -->
+                <button id="loadMore" class="load-more-btn hidden">Загрузить еще</button>
+            </div>
+
+            <!-- Favorites Tab -->
+            <div id="favoritesTab" class="tab-content">
+                <div class="favorites-header">
+                    <h2>Избранное</h2>
+                    <button id="openSearchFavorites" class="search-icon-btn">🔍</button>
+                </div>
+                <div id="favoritesGrid" class="products-grid"></div>
+                <div id="emptyFavorites" class="empty-state hidden">
+                    <div class="empty-icon">💕</div>
+                    <h3>Нет избранных товаров</h3>
+                    <p>Добавьте товары в избранное, нажимая на сердечко</p>
+                </div>
+            </div>
+
+            <!-- Account Tab -->
+            <div id="accountTab" class="tab-content">
+                <div class="account-header">
+                    <h2>Аккаунт</h2>
+                </div>
+                
+                <div class="account-content">
+                    <!-- User Info -->
+                    <div class="account-section">
+                        <div class="user-info">
+                            <div class="user-avatar">👤</div>
+                            <div class="user-details">
+                                <div class="user-name" id="userName">Пользователь</div>
+                                <div class="user-id" id="userID">ID: 123456789</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Support -->
+                    <div class="account-section">
+                        <div class="support-info">
+                            <div class="support-icon">💬</div>
+                            <div class="support-text">
+                                <h4>Круглосуточная поддержка</h4>
+                                <p>Мы на связи 24/7</p>
+                            </div>
+                            <button id="contactSupport" class="contact-btn">Связаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Upload Database -->
+                    <div class="account-section">
+                        <h4>Загрузить базу товаров</h4>
+                        <input type="file" id="fileUpload" accept=".json,.csv,.xlsx" class="file-input">
+                        <label for="fileUpload" class="upload-btn">Выбрать файл</label>
+                        <div id="uploadStatus" class="upload-status hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-tab="home">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-text">Главная</span>
+            </button>
+            <button class="nav-btn" data-tab="favorites">
+                <span class="nav-icon">💕</span>
+                <span class="nav-text">Избранное</span>
+            </button>
+            <button class="nav-btn" data-tab="account">
+                <span class="nav-icon">👤</span>
+                <span class="nav-text">Аккаунт</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/categories.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW registered'))
+                    .catch(err => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</body>
+</html>
