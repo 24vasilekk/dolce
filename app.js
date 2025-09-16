@@ -468,7 +468,7 @@ class FashionApp {
             <div class="product-image-container">
                 <img src="${product.image}" alt="${product.name}" class="product-image">
                 <button class="like-btn ${isLiked ? 'liked' : ''}" data-product-id="${product.id}">
-                    ${isLiked ? '💕' : '🤍'}
+                    ${isLiked ? '♥' : '♡'}
                 </button>
             </div>
             <div class="product-info">
@@ -478,7 +478,7 @@ class FashionApp {
                     ${this.formatPrice(price)}
                     ${originalPrice ? `<span style="text-decoration: line-through; color: #999; margin-left: 0.5rem;">${this.formatPrice(originalPrice)}</span>` : ''}
                 </div>
-                <div class="product-sizes">Размеры: ${product.sizes.join(', ')}</div>
+                <div class="product-sizes">Sizes: ${product.sizes.join(', ')}</div>
             </div>
         `;
 
@@ -523,7 +523,7 @@ class FashionApp {
             const productId = parseInt(btn.dataset.productId);
             const isLiked = this.favorites.has(productId);
             btn.classList.toggle('liked', isLiked);
-            btn.textContent = isLiked ? '💕' : '🤍';
+            btn.textContent = isLiked ? '♥' : '♡';
         });
     }
 
@@ -763,7 +763,7 @@ class FashionApp {
         this.filters.materials.forEach(material => this.addFilterTag(tagsContainer, 'material', material, material));
         
         if (this.filters.onSale) {
-            this.addFilterTag(tagsContainer, 'sale', 'true', 'Распродажа');
+            this.addFilterTag(tagsContainer, 'sale', 'true', 'Sale');
         }
         
         if (this.searchQuery) {

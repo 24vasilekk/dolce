@@ -1,322 +1,322 @@
 // Структура категорий для мужчин, женщин и детей
 const CATEGORIES = {
     men: {
-        title: "Мужчинам",
+        title: "Men",
         categories: [
             {
-                name: "Все товары",
+                name: "All Products",
                 slug: "all",
                 subcategories: []
             },
             {
-                name: "Распродажа",
+                name: "Sale",
                 slug: "sale",
                 subcategories: []
             },
             {
-                name: "Бренды",
+                name: "Brands",
                 slug: "brands",
                 subcategories: []
             },
             {
-                name: "Одежда",
+                name: "Clothing",
                 slug: "clothing",
                 subcategories: [
-                    "Все позиции",
-                    "Брюки",
-                    "Верхняя одежда",
-                    "Джинсы",
-                    "Майки и футболки",
-                    "Нижнее белье и домашняя одежда",
-                    "Плавки и пляжные шорты",
-                    "Рубашки",
-                    "Спортивные костюмы",
-                    "Трикотаж",
-                    "Худи и толстовки",
-                    "Шорты"
+                    "All Items",
+                    "Pants",
+                    "Outerwear",
+                    "Jeans",
+                    "T-Shirts & Tanks",
+                    "Underwear & Loungewear",
+                    "Swim & Beach Shorts",
+                    "Shirts",
+                    "Tracksuits",
+                    "Knitwear",
+                    "Hoodies & Sweatshirts",
+                    "Shorts"
                 ]
             },
             {
-                name: "Обувь",
+                name: "Shoes",
                 slug: "shoes",
                 subcategories: [
-                    "Все позиции",
-                    "Ботинки",
-                    "Кроссовки и кеды",
-                    "Лоферы и мокасины",
-                    "Сандалии и шлепанцы",
-                    "Туфли",
-                    "Эспадрильи"
+                    "All Items",
+                    "Boots",
+                    "Sneakers",
+                    "Loafers & Moccasins",
+                    "Sandals & Slides",
+                    "Dress Shoes",
+                    "Espadrilles"
                 ]
             },
             {
-                name: "Сумки",
+                name: "Bags",
                 slug: "bags",
                 subcategories: [
-                    "Все позиции",
-                    "Барсетки",
-                    "Папки для документов",
-                    "Портфели",
-                    "Поясные сумки",
-                    "Рюкзаки",
-                    "Спортивные и дорожные сумки",
-                    "Сумки на плечо",
-                    "Сумки тоут"
+                    "All Items",
+                    "Briefcases",
+                    "Document Holders",
+                    "Portfolios",
+                    "Belt Bags",
+                    "Backpacks",
+                    "Duffel & Travel Bags",
+                    "Shoulder Bags",
+                    "Tote Bags"
                 ]
             },
             {
-                name: "Аксессуары",
+                name: "Accessories",
                 slug: "accessories",
                 subcategories: [
-                    "Все позиции",
-                    "Головные уборы",
-                    "Другое",
-                    "Игрушки для дома",
-                    "Кольца",
-                    "Кошельки и кардхолдеры",
-                    "Обложки и футляры",
-                    "Очки",
-                    "Перчатки",
-                    "Ремни",
-                    "Часы",
-                    "Шарфы"
+                    "All Items",
+                    "Hats",
+                    "Other",
+                    "Home Toys",
+                    "Rings",
+                    "Wallets & Cardholders",
+                    "Cases & Covers",
+                    "Sunglasses",
+                    "Gloves",
+                    "Belts",
+                    "Watches",
+                    "Scarves"
                 ]
             },
             {
-                name: "Бьюти",
+                name: "Beauty",
                 slug: "beauty",
                 subcategories: [
-                    "Все позиции",
-                    "Наборы",
-                    "Парфюмерия",
-                    "Уход за лицом",
-                    "Уход за телом"
+                    "All Items",
+                    "Sets",
+                    "Fragrance",
+                    "Skincare",
+                    "Body Care"
                 ]
             },
             {
-                name: "Украшения",
+                name: "Jewelry",
                 slug: "jewelry",
                 subcategories: [
-                    "Все позиции",
-                    "Браслеты",
-                    "Кольца",
-                    "Подвески"
+                    "All Items",
+                    "Bracelets",
+                    "Rings",
+                    "Pendants"
                 ]
             }
         ]
     },
     women: {
-        title: "Женщинам",
+        title: "Women",
         categories: [
             {
-                name: "Все товары",
+                name: "All Products",
                 slug: "all",
                 subcategories: []
             },
             {
-                name: "Распродажа",
+                name: "Sale",
                 slug: "sale",
                 subcategories: []
             },
             {
-                name: "Бренды",
+                name: "Brands",
                 slug: "brands",
                 subcategories: []
             },
             {
-                name: "Одежда",
+                name: "Clothing",
                 slug: "clothing",
                 subcategories: [
-                    "Все позиции",
-                    "Блузки и рубашки",
-                    "Брюки",
-                    "Верхняя одежда",
-                    "Джинсы",
-                    "Комбинезоны",
-                    "Костюмы",
-                    "Купальники",
-                    "Майки и футболки",
-                    "Нижнее белье и домашняя одежда",
-                    "Платья",
-                    "Спортивная одежда",
-                    "Трикотаж",
-                    "Худи и толстовки",
-                    "Юбки"
+                    "All Items",
+                    "Blouses & Shirts",
+                    "Pants",
+                    "Outerwear",
+                    "Jeans",
+                    "Jumpsuits",
+                    "Suits",
+                    "Swimwear",
+                    "T-Shirts & Tanks",
+                    "Underwear & Loungewear",
+                    "Dresses",
+                    "Activewear",
+                    "Knitwear",
+                    "Hoodies & Sweatshirts",
+                    "Skirts"
                 ]
             },
             {
-                name: "Обувь",
+                name: "Shoes",
                 slug: "shoes",
                 subcategories: [
-                    "Все позиции",
-                    "Балетки",
-                    "Ботильоны",
-                    "Ботинки",
-                    "Кроссовки и кеды",
-                    "Лоферы и мокасины",
-                    "Сандалии",
-                    "Сапоги",
-                    "Туфли",
-                    "Шлепанцы",
-                    "Эспадрильи"
+                    "All Items",
+                    "Flats",
+                    "Ankle Boots",
+                    "Boots",
+                    "Sneakers",
+                    "Loafers & Moccasins",
+                    "Sandals",
+                    "Tall Boots",
+                    "Pumps & Heels",
+                    "Slides",
+                    "Espadrilles"
                 ]
             },
             {
-                name: "Сумки",
+                name: "Bags",
                 slug: "bags",
                 subcategories: [
-                    "Все позиции",
-                    "Клатчи",
-                    "Косметички",
-                    "Поясные сумки",
-                    "Рюкзаки",
-                    "Спортивные и дорожные сумки",
-                    "Сумки на плечо",
-                    "Сумки тоут",
-                    "Сумки через плечо",
-                    "Чемоданы"
+                    "All Items",
+                    "Clutches",
+                    "Cosmetic Cases",
+                    "Belt Bags",
+                    "Backpacks",
+                    "Duffel & Travel Bags",
+                    "Shoulder Bags",
+                    "Tote Bags",
+                    "Crossbody Bags",
+                    "Luggage"
                 ]
             },
             {
-                name: "Аксессуары",
+                name: "Accessories",
                 slug: "accessories",
                 subcategories: [
-                    "Все позиции",
-                    "Головные уборы",
-                    "Другое",
-                    "Заколки и резинки",
-                    "Кошельки и кардхолдеры",
-                    "Обложки и футляры",
-                    "Очки",
-                    "Перчатки",
-                    "Ремни",
-                    "Часы",
-                    "Шарфы и палантины"
+                    "All Items",
+                    "Hats",
+                    "Other",
+                    "Hair Accessories",
+                    "Wallets & Cardholders",
+                    "Cases & Covers",
+                    "Sunglasses",
+                    "Gloves",
+                    "Belts",
+                    "Watches",
+                    "Scarves & Wraps"
                 ]
             },
             {
-                name: "Бьюти",
+                name: "Beauty",
                 slug: "beauty",
                 subcategories: [
-                    "Все позиции",
-                    "Декоративная косметика",
-                    "Наборы",
-                    "Парфюмерия",
-                    "Уход за волосами",
-                    "Уход за лицом",
-                    "Уход за телом"
+                    "All Items",
+                    "Makeup",
+                    "Sets",
+                    "Fragrance",
+                    "Hair Care",
+                    "Skincare",
+                    "Body Care"
                 ]
             },
             {
-                name: "Украшения",
+                name: "Jewelry",
                 slug: "jewelry",
                 subcategories: [
-                    "Все позиции",
-                    "Браслеты",
-                    "Броши",
-                    "Колье и ожерелья",
-                    "Кольца",
-                    "Подвески",
-                    "Серьги"
+                    "All Items",
+                    "Bracelets",
+                    "Brooches",
+                    "Necklaces",
+                    "Rings",
+                    "Pendants",
+                    "Earrings"
                 ]
             }
         ]
     },
     kids: {
-        title: "Детям",
+        title: "Kids",
         categories: [
             {
-                name: "Все товары",
+                name: "All Products",
                 slug: "all",
                 subcategories: []
             },
             {
-                name: "Распродажа",
+                name: "Sale",
                 slug: "sale",
                 subcategories: []
             },
             {
-                name: "Бренды",
+                name: "Brands",
                 slug: "brands",
                 subcategories: []
             },
             {
-                name: "Одежда",
+                name: "Clothing",
                 slug: "clothing",
                 subcategories: [
-                    "Все позиции",
-                    "Брюки",
-                    "Верхняя одежда",
-                    "Джинсы",
-                    "Комбинезоны",
-                    "Купальники",
-                    "Майки и футболки",
-                    "Нижнее белье",
-                    "Платья",
-                    "Спортивная одежда",
-                    "Трикотаж",
-                    "Худи и толстовки",
-                    "Шорты",
-                    "Юбки"
+                    "All Items",
+                    "Pants",
+                    "Outerwear",
+                    "Jeans",
+                    "Jumpsuits",
+                    "Swimwear",
+                    "T-Shirts & Tanks",
+                    "Underwear",
+                    "Dresses",
+                    "Activewear",
+                    "Knitwear",
+                    "Hoodies & Sweatshirts",
+                    "Shorts",
+                    "Skirts"
                 ]
             },
             {
-                name: "Обувь",
+                name: "Shoes",
                 slug: "shoes",
                 subcategories: [
-                    "Все позиции",
-                    "Балетки",
-                    "Ботинки",
-                    "Кроссовки и кеды",
-                    "Сандалии",
-                    "Сапоги",
-                    "Туфли",
-                    "Шлепанцы"
+                    "All Items",
+                    "Flats",
+                    "Boots",
+                    "Sneakers",
+                    "Sandals",
+                    "Tall Boots",
+                    "Dress Shoes",
+                    "Slides"
                 ]
             },
             {
-                name: "Сумки",
+                name: "Bags",
                 slug: "bags",
                 subcategories: [
-                    "Все позиции",
-                    "Детские сумочки",
-                    "Рюкзаки",
-                    "Спортивные сумки"
+                    "All Items",
+                    "Kids Bags",
+                    "Backpacks",
+                    "Sports Bags"
                 ]
             },
             {
-                name: "Аксессуары",
+                name: "Accessories",
                 slug: "accessories",
                 subcategories: [
-                    "Все позиции",
-                    "Головные уборы",
-                    "Заколки и резинки",
-                    "Игрушки",
-                    "Очки",
-                    "Перчатки",
-                    "Ремни",
-                    "Часы",
-                    "Шарфы"
+                    "All Items",
+                    "Hats",
+                    "Hair Accessories",
+                    "Toys",
+                    "Sunglasses",
+                    "Gloves",
+                    "Belts",
+                    "Watches",
+                    "Scarves"
                 ]
             },
             {
-                name: "Бьюти",
+                name: "Beauty",
                 slug: "beauty",
                 subcategories: [
-                    "Все позиции",
-                    "Детская косметика",
-                    "Уход за волосами",
-                    "Уход за телом"
+                    "All Items",
+                    "Kids Cosmetics",
+                    "Hair Care",
+                    "Body Care"
                 ]
             },
             {
-                name: "Украшения",
+                name: "Jewelry",
                 slug: "jewelry",
                 subcategories: [
-                    "Все позиции",
-                    "Браслеты",
-                    "Кольца",
-                    "Подвески"
+                    "All Items",
+                    "Bracelets",
+                    "Rings",
+                    "Pendants"
                 ]
             }
         ]
@@ -325,22 +325,22 @@ const CATEGORIES = {
 
 // Цвета для фильтров
 const COLORS = [
-    { name: "Черный", value: "black", hex: "#000000" },
-    { name: "Белый", value: "white", hex: "#FFFFFF" },
-    { name: "Красный", value: "red", hex: "#DC2626" },
-    { name: "Синий", value: "blue", hex: "#2563EB" },
-    { name: "Зеленый", value: "green", hex: "#059669" },
-    { name: "Желтый", value: "yellow", hex: "#D97706" },
-    { name: "Розовый", value: "pink", hex: "#EC4899" },
-    { name: "Фиолетовый", value: "purple", hex: "#7C3AED" },
-    { name: "Коричневый", value: "brown", hex: "#92400E" },
-    { name: "Серый", value: "grey", hex: "#6B7280" },
-    { name: "Оранжевый", value: "orange", hex: "#EA580C" },
-    { name: "Бежевый", value: "beige", hex: "#D2B48C" },
-    { name: "Золотой", value: "gold", hex: "#FFD700" },
-    { name: "Серебряный", value: "silver", hex: "#C0C0C0" },
-    { name: "Бордовый", value: "burgundy", hex: "#800020" },
-    { name: "Темно-синий", value: "navy", hex: "#1E3A8A" }
+    { name: "Black", value: "black", hex: "#000000" },
+    { name: "White", value: "white", hex: "#FFFFFF" },
+    { name: "Red", value: "red", hex: "#DC2626" },
+    { name: "Blue", value: "blue", hex: "#2563EB" },
+    { name: "Green", value: "green", hex: "#059669" },
+    { name: "Yellow", value: "yellow", hex: "#D97706" },
+    { name: "Pink", value: "pink", hex: "#EC4899" },
+    { name: "Purple", value: "purple", hex: "#7C3AED" },
+    { name: "Brown", value: "brown", hex: "#92400E" },
+    { name: "Grey", value: "grey", hex: "#6B7280" },
+    { name: "Orange", value: "orange", hex: "#EA580C" },
+    { name: "Beige", value: "beige", hex: "#D2B48C" },
+    { name: "Gold", value: "gold", hex: "#FFD700" },
+    { name: "Silver", value: "silver", hex: "#C0C0C0" },
+    { name: "Burgundy", value: "burgundy", hex: "#800020" },
+    { name: "Navy", value: "navy", hex: "#1E3A8A" }
 ];
 
 // Размеры для фильтров
@@ -352,21 +352,21 @@ const SIZES = {
 
 // Материалы для фильтров
 const MATERIALS = [
-    "Хлопок",
-    "Шерсть",
-    "Кашемир",
-    "Шелк",
-    "Лен",
-    "Синтетика",
-    "Кожа",
-    "Замша",
-    "Деним",
-    "Трикотаж",
-    "Мех",
-    "Пластик",
-    "Металл",
-    "Керамика",
-    "Стекло"
+    "Cotton",
+    "Wool",
+    "Cashmere",
+    "Silk",
+    "Linen",
+    "Synthetic",
+    "Leather",
+    "Suede",
+    "Denim",
+    "Knitwear",
+    "Fur",
+    "Plastic",
+    "Metal",
+    "Ceramic",
+    "Glass"
 ];
 
 // Бренды для фильтров (будут заполняться динамически из базы данных)
