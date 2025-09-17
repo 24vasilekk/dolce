@@ -31,19 +31,24 @@ class FashionApp {
         this.updateUserInfo();
     }
 
-    // Загрузка товаров
+    // Загрузка товаров из JSON файла
     async loadProducts() {
         try {
-            // Пример товаров - в реальном приложении это будет загрузка из базы данных
-            this.products = await this.getExampleProducts();
+            const response = await fetch('data/products.json');
+            if (!response.ok) {
+                throw new Error('Не удалось загрузить товары');
+            }
+            this.products = await response.json();
+            console.log('Загружено товаров:', this.products.length);
         } catch (error) {
             console.error('Ошибка загрузки товаров:', error);
-            this.products = [];
+            // Если не удалось загрузить, используем тестовые данные
+            this.products = this.getExampleProducts();
         }
     }
 
-    // Пример товаров
-    async getExampleProducts() {
+    // Тестовые товары (на случай, если JSON не загрузится)
+    getExampleProducts() {
         return [
             {
                 id: 1,
@@ -65,6 +70,7 @@ class FashionApp {
                 name: "Платье миди с принтом",
                 brand: "Gucci",
                 price: 89990,
+                salePrice: 67490,
                 image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop",
                 gender: "women",
                 category: "clothing",
@@ -73,100 +79,7 @@ class FashionApp {
                 sizes: ["S", "M", "L"],
                 materials: ["Шелк"],
                 onSale: true,
-                salePrice: 67490,
                 description: "Элегантное платье с фирменным принтом"
-            },
-            {
-                id: 3,
-                name: "Рубашка поло",
-                brand: "Prada",
-                price: 34990,
-                image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop",
-                gender: "men",
-                category: "clothing",
-                subcategory: "Рубашки",
-                colors: ["blue", "white"],
-                sizes: ["M", "L", "XL"],
-                materials: ["Хлопок"],
-                onSale: false,
-                description: "Классическая рубашка поло"
-            },
-            {
-                id: 4,
-                name: "Сумка Birkin",
-                brand: "Hermès",
-                price: 1250000,
-                image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop",
-                gender: "women",
-                category: "bags",
-                subcategory: "Сумки тоут",
-                colors: ["brown", "black"],
-                sizes: ["One Size"],
-                materials: ["Кожа"],
-                onSale: false,
-                description: "Легендарная сумка Birkin"
-            },
-            {
-                id: 5,
-                name: "Детские кроссовки",
-                brand: "Adidas",
-                price: 7990,
-                image: "https://images.unsplash.com/photo-1544966503-7cc5ac882d24?w=400&h=400&fit=crop",
-                gender: "kids",
-                category: "shoes",
-                subcategory: "Кроссовки и кеды",
-                colors: ["white", "black"],
-                sizes: ["28", "29", "30", "31", "32"],
-                materials: ["Синтетика"],
-                onSale: true,
-                salePrice: 5990,
-                description: "Удобные детские кроссовки"
-            },
-            {
-                id: 6,
-                name: "Часы Submariner",
-                brand: "Rolex",
-                price: 890000,
-                image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop",
-                gender: "men",
-                category: "accessories",
-                subcategory: "Часы",
-                colors: ["silver", "black"],
-                sizes: ["One Size"],
-                materials: ["Металл"],
-                onSale: false,
-                description: "Швейцарские часы премиум класса"
-            },
-            {
-                id: 7,
-                name: "Шарф кашемировый",
-                brand: "Burberry",
-                price: 45990,
-                image: "https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=400&h=400&fit=crop",
-                gender: "women",
-                category: "accessories",
-                subcategory: "Шарфы и палантины",
-                colors: ["beige", "brown"],
-                sizes: ["One Size"],
-                materials: ["Кашемир"],
-                onSale: false,
-                description: "Мягкий кашемировый шарф"
-            },
-            {
-                id: 8,
-                name: "Детское платье",
-                brand: "Dolce & Gabbana",
-                price: 24990,
-                image: "https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=400&h=400&fit=crop",
-                gender: "kids",
-                category: "clothing",
-                subcategory: "Платья",
-                colors: ["pink", "white"],
-                sizes: ["4", "6", "8", "10"],
-                materials: ["Хлопок"],
-                onSale: true,
-                salePrice: 17490,
-                description: "Нарядное детское платье"
             }
         ];
     }
@@ -184,14 +97,17 @@ class FashionApp {
         });
 
         // Модальные окна
-        document.getElementById('closeCategories').addEventListener('click', () => this.closeCategories());
-        document.getElementById('closeSearch').addEventListener('click', () => this.closeSearch());
-        document.getElementById('closeFilter').addEventListener('click', () => this.closeFilter());
+        const closeButtons = document.querySelectorAll('#closeCategories, #closeSearch, #closeFilter');
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => this.closeAllModals());
+        });
 
         // Поиск
-        document.getElementById('openSearch').addEventListener('click', () => this.openSearch());
-        document.getElementById('openSearchProducts').addEventListener('click', () => this.openSearch());
-        document.getElementById('openSearchFavorites').addEventListener('click', () => this.openSearch());
+        const searchBtns = document.querySelectorAll('#openSearch, #openSearchProducts, #openSearchFavorites');
+        searchBtns.forEach(btn => {
+            btn.addEventListener('click', () => this.openSearch());
+        });
+        
         document.getElementById('searchBtn').addEventListener('click', () => this.performSearch());
         document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearchInput(e));
 
@@ -325,7 +241,7 @@ class FashionApp {
         if (this.currentSubcategory) {
             title += ` - ${this.currentSubcategory}`;
         }
-        document.getElementById('productsTitle').textContent = title;
+        document.getElementById('productsTitle').textContent = title || 'Товары';
     }
 
     // Фильтрация товаров
@@ -344,7 +260,7 @@ class FashionApp {
             }
 
             // Фильтр по подкатегории
-            if (this.currentSubcategory && this.currentSubcategory !== 'Все позиции') {
+            if (this.currentSubcategory && this.currentSubcategory !== 'All Items') {
                 if (product.subcategory !== this.currentSubcategory) {
                     return false;
                 }
@@ -425,6 +341,8 @@ class FashionApp {
         const loadMoreBtn = document.getElementById('loadMore');
         const activeFilters = document.getElementById('activeFilters');
 
+        if (!grid) return;
+
         // Показать/скрыть активные фильтры
         if (this.hasActiveFilters()) {
             activeFilters.classList.remove('hidden');
@@ -440,6 +358,12 @@ class FashionApp {
 
         // Очистить сетку
         grid.innerHTML = '';
+
+        if (productsToShow.length === 0) {
+            grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">Товары не найдены</div>';
+            loadMoreBtn.classList.add('hidden');
+            return;
+        }
 
         // Отрисовать товары
         productsToShow.forEach(product => {
@@ -466,7 +390,7 @@ class FashionApp {
 
         card.innerHTML = `
             <div class="product-image-container">
-                <img src="${product.image}" alt="${product.name}" class="product-image">
+                <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
                 <button class="like-btn ${isLiked ? 'liked' : ''}" data-product-id="${product.id}">
                     ${isLiked ? '♥' : '♡'}
                 </button>
@@ -478,7 +402,7 @@ class FashionApp {
                     ${this.formatPrice(price)}
                     ${originalPrice ? `<span style="text-decoration: line-through; color: #999; margin-left: 0.5rem;">${this.formatPrice(originalPrice)}</span>` : ''}
                 </div>
-                <div class="product-sizes">Sizes: ${product.sizes.join(', ')}</div>
+                <div class="product-sizes">Размеры: ${product.sizes.join(', ')}</div>
             </div>
         `;
 
@@ -763,7 +687,7 @@ class FashionApp {
         this.filters.materials.forEach(material => this.addFilterTag(tagsContainer, 'material', material, material));
         
         if (this.filters.onSale) {
-            this.addFilterTag(tagsContainer, 'sale', 'true', 'Sale');
+            this.addFilterTag(tagsContainer, 'sale', 'true', 'Распродажа');
         }
         
         if (this.searchQuery) {
@@ -839,6 +763,8 @@ class FashionApp {
         const grid = document.getElementById('favoritesGrid');
         const emptyState = document.getElementById('emptyFavorites');
         
+        if (!grid || !emptyState) return;
+        
         grid.innerHTML = '';
         
         const favoriteProducts = this.products.filter(product => this.favorites.has(product.id));
@@ -890,7 +816,6 @@ class FashionApp {
                 const text = await file.text();
                 products = JSON.parse(text);
             } else if (file.name.endsWith('.csv')) {
-                // Для CSV потребуется дополнительная библиотека
                 statusEl.className = 'upload-status error';
                 statusEl.textContent = 'CSV файлы пока не поддерживаются';
                 return;
@@ -898,7 +823,6 @@ class FashionApp {
                 throw new Error('Неподдерживаемый формат файла');
             }
 
-            // Валидация и нормализация данных
             const validProducts = this.validateProducts(products);
             
             if (validProducts.length > 0) {
@@ -937,7 +861,6 @@ class FashionApp {
 
     // Информация о пользователе
     updateUserInfo() {
-        // В реальном приложении здесь будет получение данных пользователя из Telegram WebApp
         const userName = document.getElementById('userName');
         const userID = document.getElementById('userID');
         
@@ -972,12 +895,14 @@ class FashionApp {
     hideLoadingScreen() {
         setTimeout(() => {
             const loadingScreen = document.getElementById('loadingScreen');
-            loadingScreen.classList.add('hidden');
-            
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }, 2000);
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        }, 1500);
     }
 }
 
