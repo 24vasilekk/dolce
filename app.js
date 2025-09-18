@@ -1,4 +1,4 @@
-// Dolce Deals Fashion App
+// Dolce Deals Fashion App - Обновленная версия
 class FashionApp {
     constructor() {
         this.currentTab = 'home';
@@ -64,22 +64,6 @@ class FashionApp {
                 materials: ["Синтетика"],
                 onSale: false,
                 description: "Удобные кроссовки для повседневной носки"
-            },
-            {
-                id: 2,
-                name: "Платье миди с принтом",
-                brand: "Gucci",
-                price: 89990,
-                salePrice: 67490,
-                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=400&fit=crop",
-                gender: "women",
-                category: "clothing",
-                subcategory: "Платья",
-                colors: ["red", "green"],
-                sizes: ["S", "M", "L"],
-                materials: ["Шелк"],
-                onSale: true,
-                description: "Элегантное платье с фирменным принтом"
             }
         ];
     }
@@ -92,7 +76,7 @@ class FashionApp {
         });
 
         // Кнопки выбора пола
-        document.querySelectorAll('.gender-btn').forEach(btn => {
+        document.querySelectorAll('.gender-card').forEach(btn => {
             btn.addEventListener('click', () => this.openCategories(btn.dataset.gender));
         });
 
@@ -103,39 +87,58 @@ class FashionApp {
         });
 
         // Поиск
-        const searchBtns = document.querySelectorAll('#openSearch, #openSearchProducts, #openSearchFavorites');
+        const searchBtns = document.querySelectorAll('.header-search, #openSearchProducts');
         searchBtns.forEach(btn => {
             btn.addEventListener('click', () => this.openSearch());
         });
         
-        document.getElementById('searchBtn').addEventListener('click', () => this.performSearch());
-        document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearchInput(e));
+        if (document.getElementById('searchBtn')) {
+            document.getElementById('searchBtn').addEventListener('click', () => this.performSearch());
+        }
+        
+        if (document.getElementById('searchInput')) {
+            document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearchInput(e));
+        }
 
         // Фильтры
-        document.getElementById('openFilters').addEventListener('click', () => this.openFilters());
-        document.getElementById('clearFilters').addEventListener('click', () => this.clearFilters());
-        document.getElementById('applyFilters').addEventListener('click', () => this.applyFilters());
+        if (document.getElementById('openFilters')) {
+            document.getElementById('openFilters').addEventListener('click', () => this.openFilters());
+        }
+        if (document.getElementById('clearFilters')) {
+            document.getElementById('clearFilters').addEventListener('click', () => this.clearFilters());
+        }
+        if (document.getElementById('applyFilters')) {
+            document.getElementById('applyFilters').addEventListener('click', () => this.applyFilters());
+        }
 
         // Сортировка
-        document.getElementById('sortSelect').addEventListener('change', (e) => this.setSorting(e.target.value));
+        if (document.getElementById('sortSelect')) {
+            document.getElementById('sortSelect').addEventListener('change', (e) => this.setSorting(e.target.value));
+        }
 
         // Кнопка назад
-        document.getElementById('backBtn').addEventListener('click', () => this.goBack());
+        if (document.getElementById('backBtn')) {
+            document.getElementById('backBtn').addEventListener('click', () => this.goBack());
+        }
 
         // Загрузка файла
-        document.getElementById('fileUpload').addEventListener('change', (e) => this.handleFileUpload(e));
+        if (document.getElementById('fileUpload')) {
+            document.getElementById('fileUpload').addEventListener('change', (e) => this.handleFileUpload(e));
+        }
 
         // Связаться с поддержкой
-        document.getElementById('contactSupport').addEventListener('click', () => this.contactSupport());
+        if (document.getElementById('contactSupport')) {
+            document.getElementById('contactSupport').addEventListener('click', () => this.contactSupport());
+        }
 
         // Загрузить еще
-        document.getElementById('loadMore').addEventListener('click', () => this.loadMore());
+        if (document.getElementById('loadMore')) {
+            document.getElementById('loadMore').addEventListener('click', () => this.loadMore());
+        }
 
         // Закрытие модальных окон по клику вне
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('categories-modal') || 
-                e.target.classList.contains('search-modal') || 
-                e.target.classList.contains('filter-modal')) {
+            if (e.target.classList.contains('modal')) {
                 this.closeAllModals();
             }
         });
@@ -238,7 +241,7 @@ class FashionApp {
         if (this.currentCategory) {
             title += ` - ${this.currentCategory.name}`;
         }
-        if (this.currentSubcategory) {
+        if (this.currentSubcategory && this.currentSubcategory !== 'Все позиции') {
             title += ` - ${this.currentSubcategory}`;
         }
         document.getElementById('productsTitle').textContent = title || 'Товары';
@@ -260,7 +263,7 @@ class FashionApp {
             }
 
             // Фильтр по подкатегории
-            if (this.currentSubcategory && this.currentSubcategory !== 'All Items') {
+            if (this.currentSubcategory && this.currentSubcategory !== 'Все позиции') {
                 if (product.subcategory !== this.currentSubcategory) {
                     return false;
                 }
@@ -344,11 +347,13 @@ class FashionApp {
         if (!grid) return;
 
         // Показать/скрыть активные фильтры
-        if (this.hasActiveFilters()) {
-            activeFilters.classList.remove('hidden');
-            this.renderActiveFilters();
-        } else {
-            activeFilters.classList.add('hidden');
+        if (activeFilters) {
+            if (this.hasActiveFilters()) {
+                activeFilters.classList.remove('hidden');
+                this.renderActiveFilters();
+            } else {
+                activeFilters.classList.add('hidden');
+            }
         }
 
         // Рассчитать товары для текущей страницы
@@ -360,8 +365,14 @@ class FashionApp {
         grid.innerHTML = '';
 
         if (productsToShow.length === 0) {
-            grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">Товары не найдены</div>';
-            loadMoreBtn.classList.add('hidden');
+            grid.innerHTML = `
+                <div class="empty-state" style="grid-column: 1 / -1;">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Товары не найдены</h3>
+                    <p>Попробуйте изменить фильтры или выбрать другую категорию</p>
+                </div>
+            `;
+            if (loadMoreBtn) loadMoreBtn.classList.add('hidden');
             return;
         }
 
@@ -372,10 +383,12 @@ class FashionApp {
         });
 
         // Показать/скрыть кнопку "Загрузить еще"
-        if (endIndex < this.filteredProducts.length) {
-            loadMoreBtn.classList.remove('hidden');
-        } else {
-            loadMoreBtn.classList.add('hidden');
+        if (loadMoreBtn) {
+            if (endIndex < this.filteredProducts.length) {
+                loadMoreBtn.classList.remove('hidden');
+            } else {
+                loadMoreBtn.classList.add('hidden');
+            }
         }
     }
 
@@ -400,7 +413,7 @@ class FashionApp {
                 <div class="product-name">${product.name}</div>
                 <div class="product-price">
                     ${this.formatPrice(price)}
-                    ${originalPrice ? `<span style="text-decoration: line-through; color: #999; margin-left: 0.5rem;">${this.formatPrice(originalPrice)}</span>` : ''}
+                    ${originalPrice ? `<span class="product-original-price">${this.formatPrice(originalPrice)}</span>` : ''}
                 </div>
                 <div class="product-sizes">Размеры: ${product.sizes.join(', ')}</div>
             </div>
@@ -453,13 +466,25 @@ class FashionApp {
 
     // Поиск
     openSearch() {
-        document.getElementById('searchModal').classList.remove('hidden');
-        document.getElementById('searchInput').focus();
+        const searchModal = document.getElementById('searchModal');
+        if (searchModal) {
+            searchModal.classList.remove('hidden');
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        }
     }
 
     closeSearch() {
-        document.getElementById('searchModal').classList.add('hidden');
-        document.getElementById('searchResults').innerHTML = '';
+        const searchModal = document.getElementById('searchModal');
+        if (searchModal) {
+            searchModal.classList.add('hidden');
+        }
+        const searchResults = document.getElementById('searchResults');
+        if (searchResults) {
+            searchResults.innerHTML = '';
+        }
     }
 
     handleSearchInput(e) {
@@ -467,12 +492,18 @@ class FashionApp {
         if (query.length > 2) {
             this.showSearchResults(query);
         } else {
-            document.getElementById('searchResults').innerHTML = '';
+            const searchResults = document.getElementById('searchResults');
+            if (searchResults) {
+                searchResults.innerHTML = '';
+            }
         }
     }
 
     performSearch() {
-        this.searchQuery = document.getElementById('searchInput').value.trim();
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            this.searchQuery = searchInput.value.trim();
+        }
         this.closeSearch();
         this.currentPage = 1;
         this.filterProducts();
@@ -491,6 +522,8 @@ class FashionApp {
         ).slice(0, 5);
 
         const resultsContainer = document.getElementById('searchResults');
+        if (!resultsContainer) return;
+        
         resultsContainer.innerHTML = '';
 
         results.forEach(product => {
@@ -506,7 +539,10 @@ class FashionApp {
             `;
             
             resultItem.addEventListener('click', () => {
-                document.getElementById('searchInput').value = product.name;
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput) {
+                    searchInput.value = product.name;
+                }
                 this.performSearch();
             });
             
@@ -517,72 +553,89 @@ class FashionApp {
     // Фильтры
     openFilters() {
         this.renderFilterOptions();
-        document.getElementById('filterModal').classList.remove('hidden');
+        const filterModal = document.getElementById('filterModal');
+        if (filterModal) {
+            filterModal.classList.remove('hidden');
+        }
     }
 
     closeFilter() {
-        document.getElementById('filterModal').classList.add('hidden');
+        const filterModal = document.getElementById('filterModal');
+        if (filterModal) {
+            filterModal.classList.add('hidden');
+        }
     }
 
     renderFilterOptions() {
         // Бренды
         const brandFilters = document.getElementById('brandFilters');
-        brandFilters.innerHTML = '';
-        const availableBrands = [...new Set(this.products.map(p => p.brand))].sort();
-        
-        availableBrands.forEach(brand => {
-            const label = document.createElement('label');
-            label.className = 'filter-checkbox';
-            label.innerHTML = `
-                <input type="checkbox" value="${brand}" ${this.filters.brands.has(brand) ? 'checked' : ''}>
-                <span>${brand}</span>
-            `;
-            brandFilters.appendChild(label);
-        });
+        if (brandFilters) {
+            brandFilters.innerHTML = '';
+            const availableBrands = [...new Set(this.products.map(p => p.brand))].sort();
+            
+            availableBrands.forEach(brand => {
+                const label = document.createElement('label');
+                label.className = 'filter-checkbox';
+                label.innerHTML = `
+                    <input type="checkbox" value="${brand}" ${this.filters.brands.has(brand) ? 'checked' : ''}>
+                    <span>${brand}</span>
+                `;
+                brandFilters.appendChild(label);
+            });
+        }
 
         // Цвета
         const colorFilters = document.getElementById('colorFilters');
-        colorFilters.innerHTML = '';
-        
-        COLORS.forEach(color => {
-            const colorBtn = document.createElement('button');
-            colorBtn.className = `color-filter ${this.filters.colors.has(color.value) ? 'active' : ''}`;
-            colorBtn.style.setProperty('--color', color.hex);
-            colorBtn.dataset.color = color.value;
-            colorBtn.title = color.name;
-            colorFilters.appendChild(colorBtn);
-        });
+        if (colorFilters) {
+            colorFilters.innerHTML = '';
+            
+            COLORS.forEach(color => {
+                const colorBtn = document.createElement('button');
+                colorBtn.className = `color-filter ${this.filters.colors.has(color.value) ? 'active' : ''}`;
+                colorBtn.style.setProperty('--color', color.hex);
+                colorBtn.dataset.color = color.value;
+                colorBtn.title = color.name;
+                colorFilters.appendChild(colorBtn);
+            });
+        }
 
         // Размеры
         const sizeFilters = document.getElementById('sizeFilters');
-        sizeFilters.innerHTML = '';
-        const availableSizes = [...new Set(this.products.flatMap(p => p.sizes))].sort();
-        
-        availableSizes.forEach(size => {
-            const sizeBtn = document.createElement('button');
-            sizeBtn.className = `size-filter ${this.filters.sizes.has(size) ? 'active' : ''}`;
-            sizeBtn.textContent = size;
-            sizeBtn.dataset.size = size;
-            sizeFilters.appendChild(sizeBtn);
-        });
+        if (sizeFilters) {
+            sizeFilters.innerHTML = '';
+            const availableSizes = [...new Set(this.products.flatMap(p => p.sizes))].sort();
+            
+            availableSizes.forEach(size => {
+                const sizeBtn = document.createElement('button');
+                sizeBtn.className = `size-filter ${this.filters.sizes.has(size) ? 'active' : ''}`;
+                sizeBtn.textContent = size;
+                sizeBtn.dataset.size = size;
+                sizeFilters.appendChild(sizeBtn);
+            });
+        }
 
         // Материалы
         const materialFilters = document.getElementById('materialFilters');
-        materialFilters.innerHTML = '';
-        const availableMaterials = [...new Set(this.products.flatMap(p => p.materials))].sort();
-        
-        availableMaterials.forEach(material => {
-            const label = document.createElement('label');
-            label.className = 'filter-checkbox';
-            label.innerHTML = `
-                <input type="checkbox" value="${material}" ${this.filters.materials.has(material) ? 'checked' : ''}>
-                <span>${material}</span>
-            `;
-            materialFilters.appendChild(label);
-        });
+        if (materialFilters) {
+            materialFilters.innerHTML = '';
+            const availableMaterials = [...new Set(this.products.flatMap(p => p.materials))].sort();
+            
+            availableMaterials.forEach(material => {
+                const label = document.createElement('label');
+                label.className = 'filter-checkbox';
+                label.innerHTML = `
+                    <input type="checkbox" value="${material}" ${this.filters.materials.has(material) ? 'checked' : ''}>
+                    <span>${material}</span>
+                `;
+                materialFilters.appendChild(label);
+            });
+        }
 
         // Специальные фильтры
-        document.getElementById('saleFilter').checked = this.filters.onSale;
+        const saleFilter = document.getElementById('saleFilter');
+        if (saleFilter) {
+            saleFilter.checked = this.filters.onSale;
+        }
 
         // Обработчики событий для фильтров
         this.setupFilterEventListeners();
@@ -590,59 +643,74 @@ class FashionApp {
 
     setupFilterEventListeners() {
         // Бренды
-        document.getElementById('brandFilters').addEventListener('change', (e) => {
-            if (e.target.type === 'checkbox') {
-                if (e.target.checked) {
-                    this.filters.brands.add(e.target.value);
-                } else {
-                    this.filters.brands.delete(e.target.value);
+        const brandFilters = document.getElementById('brandFilters');
+        if (brandFilters) {
+            brandFilters.addEventListener('change', (e) => {
+                if (e.target.type === 'checkbox') {
+                    if (e.target.checked) {
+                        this.filters.brands.add(e.target.value);
+                    } else {
+                        this.filters.brands.delete(e.target.value);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Цвета
-        document.getElementById('colorFilters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('color-filter')) {
-                const color = e.target.dataset.color;
-                if (this.filters.colors.has(color)) {
-                    this.filters.colors.delete(color);
-                    e.target.classList.remove('active');
-                } else {
-                    this.filters.colors.add(color);
-                    e.target.classList.add('active');
+        const colorFilters = document.getElementById('colorFilters');
+        if (colorFilters) {
+            colorFilters.addEventListener('click', (e) => {
+                if (e.target.classList.contains('color-filter')) {
+                    const color = e.target.dataset.color;
+                    if (this.filters.colors.has(color)) {
+                        this.filters.colors.delete(color);
+                        e.target.classList.remove('active');
+                    } else {
+                        this.filters.colors.add(color);
+                        e.target.classList.add('active');
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Размеры
-        document.getElementById('sizeFilters').addEventListener('click', (e) => {
-            if (e.target.classList.contains('size-filter')) {
-                const size = e.target.dataset.size;
-                if (this.filters.sizes.has(size)) {
-                    this.filters.sizes.delete(size);
-                    e.target.classList.remove('active');
-                } else {
-                    this.filters.sizes.add(size);
-                    e.target.classList.add('active');
+        const sizeFilters = document.getElementById('sizeFilters');
+        if (sizeFilters) {
+            sizeFilters.addEventListener('click', (e) => {
+                if (e.target.classList.contains('size-filter')) {
+                    const size = e.target.dataset.size;
+                    if (this.filters.sizes.has(size)) {
+                        this.filters.sizes.delete(size);
+                        e.target.classList.remove('active');
+                    } else {
+                        this.filters.sizes.add(size);
+                        e.target.classList.add('active');
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Материалы
-        document.getElementById('materialFilters').addEventListener('change', (e) => {
-            if (e.target.type === 'checkbox') {
-                if (e.target.checked) {
-                    this.filters.materials.add(e.target.value);
-                } else {
-                    this.filters.materials.delete(e.target.value);
+        const materialFilters = document.getElementById('materialFilters');
+        if (materialFilters) {
+            materialFilters.addEventListener('change', (e) => {
+                if (e.target.type === 'checkbox') {
+                    if (e.target.checked) {
+                        this.filters.materials.add(e.target.value);
+                    } else {
+                        this.filters.materials.delete(e.target.value);
+                    }
                 }
-            }
-        });
+            });
+        }
 
         // Специальные фильтры
-        document.getElementById('saleFilter').addEventListener('change', (e) => {
-            this.filters.onSale = e.target.checked;
-        });
+        const saleFilter = document.getElementById('saleFilter');
+        if (saleFilter) {
+            saleFilter.addEventListener('change', (e) => {
+                this.filters.onSale = e.target.checked;
+            });
+        }
     }
 
     applyFilters() {
@@ -674,6 +742,8 @@ class FashionApp {
 
     renderActiveFilters() {
         const container = document.getElementById('activeFilters');
+        if (!container) return;
+        
         container.innerHTML = '<div class="filter-tags"></div>';
         const tagsContainer = container.querySelector('.filter-tags');
 
@@ -796,7 +866,10 @@ class FashionApp {
     }
 
     closeCategories() {
-        document.getElementById('categoriesModal').classList.add('hidden');
+        const categoriesModal = document.getElementById('categoriesModal');
+        if (categoriesModal) {
+            categoriesModal.classList.add('hidden');
+        }
     }
 
     // Работа с файлами
@@ -805,37 +878,39 @@ class FashionApp {
         if (!file) return;
 
         const statusEl = document.getElementById('uploadStatus');
-        statusEl.classList.remove('hidden');
-        statusEl.className = 'upload-status';
-        statusEl.textContent = 'Загрузка...';
+        if (statusEl) {
+            statusEl.classList.remove('hidden');
+            statusEl.className = 'upload-status';
+            statusEl.textContent = 'Загрузка...';
 
-        try {
-            let products = [];
-            
-            if (file.name.endsWith('.json')) {
-                const text = await file.text();
-                products = JSON.parse(text);
-            } else if (file.name.endsWith('.csv')) {
+            try {
+                let products = [];
+                
+                if (file.name.endsWith('.json')) {
+                    const text = await file.text();
+                    products = JSON.parse(text);
+                } else if (file.name.endsWith('.csv')) {
+                    statusEl.className = 'upload-status error';
+                    statusEl.textContent = 'CSV файлы пока не поддерживаются';
+                    return;
+                } else {
+                    throw new Error('Неподдерживаемый формат файла');
+                }
+
+                const validProducts = this.validateProducts(products);
+                
+                if (validProducts.length > 0) {
+                    this.products = [...this.products, ...validProducts];
+                    statusEl.className = 'upload-status success';
+                    statusEl.textContent = `Успешно загружено ${validProducts.length} товаров`;
+                } else {
+                    throw new Error('Не найдено валидных товаров');
+                }
+                
+            } catch (error) {
                 statusEl.className = 'upload-status error';
-                statusEl.textContent = 'CSV файлы пока не поддерживаются';
-                return;
-            } else {
-                throw new Error('Неподдерживаемый формат файла');
+                statusEl.textContent = `Ошибка: ${error.message}`;
             }
-
-            const validProducts = this.validateProducts(products);
-            
-            if (validProducts.length > 0) {
-                this.products = [...this.products, ...validProducts];
-                statusEl.className = 'upload-status success';
-                statusEl.textContent = `Успешно загружено ${validProducts.length} товаров`;
-            } else {
-                throw new Error('Не найдено валидных товаров');
-            }
-            
-        } catch (error) {
-            statusEl.className = 'upload-status error';
-            statusEl.textContent = `Ошибка: ${error.message}`;
         }
     }
 
@@ -864,13 +939,15 @@ class FashionApp {
         const userName = document.getElementById('userName');
         const userID = document.getElementById('userID');
         
-        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe.user) {
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
-            userName.textContent = user.first_name + (user.last_name ? ` ${user.last_name}` : '');
-            userID.textContent = `ID: ${user.id}`;
-        } else {
-            userName.textContent = 'Пользователь';
-            userID.textContent = 'ID: 123456789';
+        if (userName && userID) {
+            if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe.user) {
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
+                userName.textContent = user.first_name + (user.last_name ? ` ${user.last_name}` : '');
+                userID.textContent = `ID: ${user.id}`;
+            } else {
+                userName.textContent = 'Пользователь';
+                userID.textContent = 'ID: 123456789';
+            }
         }
     }
 
