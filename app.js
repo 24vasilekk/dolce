@@ -86,8 +86,8 @@ class FashionApp {
             btn.addEventListener('click', () => this.closeAllModals());
         });
 
-        // Поиск
-        const searchBtns = document.querySelectorAll('.header-search, #openSearchProducts');
+        // Поиск - множественные кнопки
+        const searchBtns = document.querySelectorAll('.header-search-btn, #headerSearchBtn, #productsSearchBtn, #favoritesSearchBtn');
         searchBtns.forEach(btn => {
             btn.addEventListener('click', () => this.openSearch());
         });
@@ -100,6 +100,20 @@ class FashionApp {
             document.getElementById('searchInput').addEventListener('input', (e) => this.handleSearchInput(e));
         }
 
+        // Сортировка
+        if (document.getElementById('sortButton')) {
+            document.getElementById('sortButton').addEventListener('click', () => this.toggleSortDropdown());
+        }
+
+        // Опции сортировки
+        document.querySelectorAll('.sort-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const sortValue = e.target.dataset.sort;
+                this.setSorting(sortValue);
+                this.closeSortDropdown();
+            });
+        });
+
         // Фильтры
         if (document.getElementById('openFilters')) {
             document.getElementById('openFilters').addEventListener('click', () => this.openFilters());
@@ -109,11 +123,6 @@ class FashionApp {
         }
         if (document.getElementById('applyFilters')) {
             document.getElementById('applyFilters').addEventListener('click', () => this.applyFilters());
-        }
-
-        // Сортировка
-        if (document.getElementById('sortSelect')) {
-            document.getElementById('sortSelect').addEventListener('change', (e) => this.setSorting(e.target.value));
         }
 
         // Кнопка назад
@@ -136,10 +145,23 @@ class FashionApp {
             document.getElementById('loadMore').addEventListener('click', () => this.loadMore());
         }
 
-        // Закрытие модальных окон по клику вне
+        // Закрытие модальных окон и выпадающих меню по клику вне
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 this.closeAllModals();
+            }
+            
+            // Закрытие выпадающего меню сортировки
+            if (!e.target.closest('.sort-dropdown')) {
+                this.closeSortDropdown();
+            }
+        });
+
+        // Обработка клавиши Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeAllModals();
+                this.closeSortDropdown();
             }
         });
     }
@@ -166,6 +188,61 @@ class FashionApp {
         if (tab === 'favorites') {
             this.updateFavoritesTab();
         }
+    }
+
+    // Сортировка
+    toggleSortDropdown() {
+        const dropdown = document.getElementById('sortDropdown');
+        const button = document.getElementById('sortButton');
+        
+        if (dropdown && button) {
+            const isOpen = !dropdown.classList.contains('hidden');
+            
+            if (isOpen) {
+                this.closeSortDropdown();
+            } else {
+                dropdown.classList.remove('hidden');
+                button.classList.add('active');
+            }
+        }
+    }
+
+    closeSortDropdown() {
+        const dropdown = document.getElementById('sortDropdown');
+        const button = document.getElementById('sortButton');
+        
+        if (dropdown && button) {
+            dropdown.classList.add('hidden');
+            button.classList.remove('active');
+        }
+    }
+
+    setSorting(sortBy) {
+        this.sortBy = sortBy;
+        
+        // Обновить текст кнопки сортировки
+        const sortLabel = document.getElementById('sortLabel');
+        const sortOptions = {
+            'name': 'Название А-Я',
+            'price-asc': 'Цена: по возрастанию',
+            'price-desc': 'Цена: по убыванию',
+            'brand': 'Бренд А-Я'
+        };
+        
+        if (sortLabel) {
+            sortLabel.textContent = sortOptions[sortBy] || 'Сортировка';
+        }
+        
+        // Обновить активный пункт в выпадающем меню
+        document.querySelectorAll('.sort-option').forEach(option => {
+            option.classList.remove('active');
+            if (option.dataset.sort === sortBy) {
+                option.classList.add('active');
+            }
+        });
+        
+        this.sortProducts();
+        this.renderProducts();
     }
 
     // Открытие категорий
@@ -367,7 +444,12 @@ class FashionApp {
         if (productsToShow.length === 0) {
             grid.innerHTML = `
                 <div class="empty-state" style="grid-column: 1 / -1;">
-                    <div class="empty-icon">🔍</div>
+                    <div class="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
                     <h3>Товары не найдены</h3>
                     <p>Попробуйте изменить фильтры или выбрать другую категорию</p>
                 </div>
@@ -405,7 +487,9 @@ class FashionApp {
             <div class="product-image-container">
                 <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
                 <button class="like-btn ${isLiked ? 'liked' : ''}" data-product-id="${product.id}">
-                    ${isLiked ? '♥' : '♡'}
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="${isLiked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
                 </button>
             </div>
             <div class="product-info">
@@ -459,8 +543,12 @@ class FashionApp {
         document.querySelectorAll('.like-btn').forEach(btn => {
             const productId = parseInt(btn.dataset.productId);
             const isLiked = this.favorites.has(productId);
+            const svg = btn.querySelector('svg');
+            
             btn.classList.toggle('liked', isLiked);
-            btn.textContent = isLiked ? '♥' : '♡';
+            if (svg) {
+                svg.setAttribute('fill', isLiked ? 'currentColor' : 'none');
+            }
         });
     }
 
@@ -578,6 +666,7 @@ class FashionApp {
                 label.className = 'filter-checkbox';
                 label.innerHTML = `
                     <input type="checkbox" value="${brand}" ${this.filters.brands.has(brand) ? 'checked' : ''}>
+                    <span class="checkmark"></span>
                     <span>${brand}</span>
                 `;
                 brandFilters.appendChild(label);
@@ -625,6 +714,7 @@ class FashionApp {
                 label.className = 'filter-checkbox';
                 label.innerHTML = `
                     <input type="checkbox" value="${material}" ${this.filters.materials.has(material) ? 'checked' : ''}>
+                    <span class="checkmark"></span>
                     <span>${material}</span>
                 `;
                 materialFilters.appendChild(label);
@@ -804,13 +894,6 @@ class FashionApp {
         
         this.currentPage = 1;
         this.filterProducts();
-        this.renderProducts();
-    }
-
-    // Сортировка
-    setSorting(sortBy) {
-        this.sortBy = sortBy;
-        this.sortProducts();
         this.renderProducts();
     }
 

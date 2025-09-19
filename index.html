@@ -41,7 +41,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 id="categoriesTitle" class="modal-title">Категории</h3>
-                    <button id="closeCategories" class="close-button">×</button>
+                    <button id="closeCategories" class="close-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
                 </div>
                 <div id="categoriesList" class="categories-list"></div>
             </div>
@@ -52,10 +57,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Поиск</h3>
-                    <button id="closeSearch" class="close-button">×</button>
+                    <button id="closeSearch" class="close-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
                 </div>
                 <div class="search-input-container">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Поиск товаров...">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Поиск товаров...">
+                    </div>
                     <button id="searchBtn" class="search-btn">Найти</button>
                 </div>
                 <div id="searchResults" class="search-results"></div>
@@ -67,8 +83,15 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Фильтры</h3>
-                    <button id="clearFilters" class="clear-btn">Очистить</button>
-                    <button id="closeFilter" class="close-button">×</button>
+                    <div class="modal-actions">
+                        <button id="clearFilters" class="clear-btn">Очистить</button>
+                        <button id="closeFilter" class="close-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
                 <div class="filter-content">
                     <div class="filter-group">
@@ -91,6 +114,7 @@
                         <h4>Специальное</h4>
                         <label class="filter-checkbox">
                             <input type="checkbox" id="saleFilter">
+                            <span class="checkmark"></span>
                             <span>Только распродажа</span>
                         </label>
                     </div>
@@ -104,8 +128,14 @@
             <!-- Home Tab -->
             <div id="homeTab" class="tab-content active">
                 <div class="logo-header">
-                    <div class="logo">DOLCE DEALS</div>
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
                     <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                    <button class="header-search-btn" id="headerSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
                 </div>
                 
                 <div class="gender-section">
@@ -135,14 +165,24 @@
                 <div class="info-section">
                     <div class="info-grid">
                         <div class="info-card">
-                            <div class="info-icon">✨</div>
+                            <div class="info-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                            </div>
                             <div class="info-content">
                                 <h3>Оригинальные товары</h3>
                                 <p>Мы выкупаем товары напрямую из официальных бутиков и магазинов брендов</p>
                             </div>
                         </div>
                         <div class="info-card">
-                            <div class="info-icon">🌍</div>
+                            <div class="info-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M2 12h20"></path>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </div>
                             <div class="info-content">
                                 <h3>Доставка по всему миру</h3>
                                 <p>Быстрая и надежная доставка в любую точку мира с полным трекингом</p>
@@ -155,26 +195,47 @@
             <!-- Products Tab -->
             <div id="productsTab" class="tab-content">
                 <div class="logo-header">
-                    <div class="logo">DOLCE DEALS</div>
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
                     <div class="logo-subtitle">Премиальная мода из бутиков</div>
-                </div>
-                
-                <div class="products-header">
-                    <button id="backBtn" class="back-button">Назад</button>
-                    <h2 id="productsTitle" class="products-title">Товары</h2>
-                    <button id="openSearchProducts" class="header-search">
-                        <span class="icon icon-search"></span>
+                    <button class="header-search-btn" id="productsSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
                     </button>
                 </div>
                 
+                <div class="products-header">
+                    <button id="backBtn" class="back-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                        Назад
+                    </button>
+                    <h2 id="productsTitle" class="products-title">Товары</h2>
+                </div>
+                
                 <div class="products-controls">
-                    <select id="sortSelect" class="sort-select">
-                        <option value="price-asc">Цена: по возрастанию</option>
-                        <option value="price-desc">Цена: по убыванию</option>
-                        <option value="name">Название А-Я</option>
-                        <option value="brand">Бренд А-Я</option>
-                    </select>
-                    <button id="openFilters" class="filters-button">Фильтры</button>
+                    <div class="sort-dropdown">
+                        <button id="sortButton" class="sort-button">
+                            <span id="sortLabel">Сортировка</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"></polyline>
+                            </svg>
+                        </button>
+                        <div id="sortDropdown" class="sort-options hidden">
+                            <button class="sort-option" data-sort="name">Название А-Я</button>
+                            <button class="sort-option" data-sort="price-asc">Цена: по возрастанию</button>
+                            <button class="sort-option" data-sort="price-desc">Цена: по убыванию</button>
+                            <button class="sort-option" data-sort="brand">Бренд А-Я</button>
+                        </div>
+                    </div>
+                    <button id="openFilters" class="filters-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"></polygon>
+                        </svg>
+                        Фильтры
+                    </button>
                 </div>
 
                 <!-- Active Filters -->
@@ -190,14 +251,24 @@
             <!-- Favorites Tab -->
             <div id="favoritesTab" class="tab-content">
                 <div class="logo-header">
-                    <div class="logo">DOLCE DEALS</div>
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
                     <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                    <button class="header-search-btn" id="favoritesSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
                 </div>
                 
                 <div id="favoritesGrid" class="products-grid"></div>
                 
                 <div id="emptyFavorites" class="empty-state hidden">
-                    <div class="empty-icon">♡</div>
+                    <div class="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
                     <h3>Нет избранных товаров</h3>
                     <p>Добавляйте товары в избранное, нажимая на кнопку сердечка</p>
                 </div>
@@ -206,14 +277,19 @@
             <!-- Account Tab -->
             <div id="accountTab" class="tab-content">
                 <div class="logo-header">
-                    <div class="logo">DOLCE DEALS</div>
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
                     <div class="logo-subtitle">Премиальная мода из бутиков</div>
                 </div>
                 
                 <div class="account-content">
                     <div class="account-card">
                         <div class="user-profile">
-                            <div class="user-avatar">👤</div>
+                            <div class="user-avatar">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
                             <div class="user-details">
                                 <h3 id="userName">Пользователь</h3>
                                 <p id="userID">ID: 123456789</p>
@@ -228,7 +304,9 @@
                                 <p>Мы всегда готовы помочь вам</p>
                             </div>
                             <button id="contactSupport" class="telegram-button">
-                                <div class="icon-telegram"></div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12C24 5.373 18.627 0 12 0S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM12.43 8.859c-1.167.485-3.5 1.49-6.998 3.014-1.297.568-1.969.893-2.017 1.391-.054.573.605.765 1.536 1.096.282.1.582.21.892.33 1.189.4 2.734.847 3.587.847.741 0 1.574-.36 2.498-1.078.866-.672 1.742-1.349 2.632-2.031.378-.291.669-.496.935-.618.318-.146.571-.22.716-.22.288 0 .53.14.726.42.196.28.293.621.293 1.022v3.401c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382-.382 0-.714-.095-.996-.285a1.847 1.847 0 0 1-.627-.695c-.159-.294-.314-.631-.464-1.01-.102-.259-.193-.496-.273-.711-.08-.215-.14-.379-.18-.491-.04-.112-.07-.186-.092-.222-.021-.036-.035-.054-.041-.054-.006 0-.01.018-.013.054s-.005.09-.005.158v1.707c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382s-.778-.127-1.054-.382c-.276-.255-.414-.598-.414-1.029v-3.874c0-.403.097-.744.293-1.022.196-.28.438-.42.726-.42.145 0 .398.074.716.22.266.122.557.327.935.618.89.682 1.766 1.359 2.632 2.031.924.718 1.757 1.078 2.498 1.078.853 0 2.398-.447 3.587-.847.31-.12.61-.23.892-.33.931-.331 1.59-.523 1.536-1.096-.048-.498-.72-.823-2.017-1.391-3.498-1.524-5.831-2.529-6.998-3.014-.49-.204-.9-.307-1.228-.307s-.738.103-1.228.307z"/>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -236,7 +314,14 @@
                     <div class="account-card">
                         <h4>Загрузить товары</h4>
                         <input type="file" id="fileUpload" class="file-input" accept=".json,.csv">
-                        <label for="fileUpload" class="upload-btn">Выбрать файл</label>
+                        <label for="fileUpload" class="upload-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Выбрать файл
+                        </label>
                         <div id="uploadStatus" class="upload-status hidden"></div>
                     </div>
                 </div>
@@ -246,15 +331,29 @@
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
             <button class="nav-btn active" data-tab="home">
-                <div class="nav-icon">🏠</div>
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                </div>
                 <div class="nav-text">Главная</div>
             </button>
             <button class="nav-btn" data-tab="favorites">
-                <div class="nav-icon">♡</div>
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
                 <div class="nav-text">Избранное</div>
             </button>
             <button class="nav-btn" data-tab="account">
-                <div class="nav-icon">👤</div>
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
                 <div class="nav-text">Аккаунт</div>
             </button>
         </nav>
