@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolce Deals - Премиальная мода</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Премиальная мода для мужчин, женщин и детей. Оригинальные товары из бутиков с доставкой по всему миру.">
+    <meta name="keywords" content="премиальная мода, бренды, одежда, обувь, аксессуары, доставка по миру">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- API Integration Styles -->
+    <style>
+        .offline-notification, .sync-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 10000;
+            font-size: 14px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .sync-notification {
+            background: rgba(25, 135, 84, 0.9);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .api-stats {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .gender-stats {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .sync-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .sync-button {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+    </style>
+    
+    <!-- Telegram WebApp Script -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">DOLCE DEALS</div>
+            <div class="loading-subtitle">Премиальная мода из бутиков</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+        <!-- Categories Modal -->
+        <div id="categoriesModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="categoriesTitle" class="modal-title">Категории</h3>
+                    <button id="closeCategories" class="close-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div id="categoriesList" class="categories-list"></div>
+            </div>
+        </div>
+
+        <!-- Search Modal -->
+        <div id="searchModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Поиск</h3>
+                    <button id="closeSearch" class="close-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search-input-container">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        <input type="text" id="searchInput" class="search-input" placeholder="Поиск товаров...">
+                    </div>
+                    <button id="searchBtn" class="search-btn">Найти</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Filter Modal -->
+        <div id="filterModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Фильтры</h3>
+                    <div class="modal-actions">
+                        <button id="clearFilters" class="clear-btn">Очистить</button>
+                        <button id="closeFilter" class="close-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="filter-content">
+                    <div class="filter-group">
+                        <h4>Бренды</h4>
+                        <div id="brandFilters" class="filter-options"></div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Цвета</h4>
+                        <div id="colorFilters" class="color-filters"></div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Размеры</h4>
+                        <div id="sizeFilters" class="size-filters"></div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Материалы</h4>
+                        <div id="materialFilters" class="filter-options"></div>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Специальное</h4>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="saleFilter">
+                            <span class="checkmark"></span>
+                            <span>Только распродажа</span>
+                        </label>
+                    </div>
+                </div>
+                <button id="applyFilters" class="apply-filters-btn">Применить фильтры</button>
+            </div>
+        </div>
+
+        <!-- ОБНОВЛЕННОЕ Product Detail Modal -->
+        <div id="productDetailModal" class="product-detail-modal hidden">
+            <div class="product-detail-content">
+                <div class="product-detail-header">
+                    <h3>Детали товара</h3>
+                    <button id="closeProductDetail" class="product-detail-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="product-detail-body">
+                    <div class="product-detail-image-section">
+                        <img id="productDetailImage" 
+                             src="" 
+                             alt="" 
+                             class="product-detail-image">
+                        <button id="productDetailFavorite" class="product-favorite-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="product-detail-info-section">
+                        <div id="productDetailBrand" class="product-detail-brand"></div>
+                        <h2 id="productDetailName" class="product-detail-name"></h2>
+                        
+                        <div class="product-detail-price-container">
+                            <div id="productDetailPrice" class="product-detail-price"></div>
+                        </div>
+
+                        <div id="productDetailDescription" class="product-detail-description"></div>
+
+                        <div class="product-detail-sizes">
+                            <h4>Выберите размер</h4>
+                            <div id="productDetailSizes" class="size-options"></div>
+                        </div>
+
+                        <div class="product-detail-specs">
+                            <h4>Характеристики</h4>
+                            <div id="productDetailSpecs" class="specs-grid"></div>
+                        </div>
+
+                        <div class="product-detail-actions">
+                            <button id="productDetailBuy" class="buy-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12C24 5.373 18.627 0 12 0S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM12.43 8.859c-1.167.485-3.5 1.49-6.998 3.014-1.297.568-1.969.893-2.017 1.391-.054.573.605.765 1.536 1.096.282.1.582.21.892.33 1.189.4 2.734.847 3.587.847.741 0 1.574-.36 2.498-1.078.866-.672 1.742-1.349 2.632-2.031.378-.291.669-.496.935-.618.318-.146.571-.22.716-.22.288 0 .53.14.726.42.196.28.293.621.293 1.022v3.401c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382-.382 0-.714-.095-.996-.285a1.847 1.847 0 0 1-.627-.695c-.159-.294-.314-.631-.464-1.01-.102-.259-.193-.496-.273-.711-.08-.215-.14-.379-.18-.491-.04-.112-.07-.186-.092-.222-.021-.036-.035-.054-.041-.054-.006 0-.01.018-.013.054s-.005.09-.005.158v1.707c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382s-.778-.127-1.054-.382c-.276-.255-.414-.598-.414-1.029v-3.874c0-.403.097-.744.293-1.022.196-.28.438-.42.726-.42.145 0 .398.074.716.22.266.122.557.327.935.618.89.682 1.766 1.359 2.632 2.031.924.718 1.757 1.078 2.498 1.078.853 0 2.398-.447 3.587-.847.31-.12.61-.23.892-.33.931-.331 1.59-.523 1.536-1.096-.048-.498-.72-.823-2.017-1.391-3.498-1.524-5.831-2.529-6.998-3.014-.49-.204-.9-.307-1.228-.307s-.738.103-1.228.307z"/>
+                                </svg>
+                                Заказать в Telegram
+                            </button>
+                            <button id="productDetailShare" class="share-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                    <polyline points="16,6 12,2 8,6"></polyline>
+                                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="similar-products">
+                    <h4>Рекомендуемые товары</h4>
+                    <div id="similarProductsGrid" class="similar-products-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Tab -->
+            <div id="homeTab" class="tab-content active">
+                <div class="logo-header">
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
+                    <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                    <button class="header-search-btn" id="headerSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="gender-section">
+                    <h2 class="section-title">Выберите категорию</h2>
+                    <div class="gender-grid">
+                        <button class="gender-card" data-gender="men">
+                            <div class="gender-card-content">
+                                <h3 class="gender-title">Мужчинам</h3>
+                                <p class="gender-subtitle">Премиальная мужская мода</p>
+                            </div>
+                        </button>
+                        <button class="gender-card" data-gender="women">
+                            <div class="gender-card-content">
+                                <h3 class="gender-title">Женщинам</h3>
+                                <p class="gender-subtitle">Элегантная женская коллекция</p>
+                            </div>
+                        </button>
+                        <button class="gender-card" data-gender="kids">
+                            <div class="gender-card-content">
+                                <h3 class="gender-title">Детям</h3>
+                                <p class="gender-subtitle">Стильная детская одежда</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Оригинальные товары</h3>
+                                <p>Мы выкупаем товары напрямую из официальных бутиков и магазинов брендов</p>
+                            </div>
+                        </div>
+                        <div class="info-card">
+                            <div class="info-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M2 12h20"></path>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                </svg>
+                            </div>
+                            <div class="info-content">
+                                <h3>Доставка по всему миру</h3>
+                                <p>Быстрая и надежная доставка в любую точку мира с полным трекингом</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="productsTab" class="tab-content">
+                <div class="logo-header">
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
+                    <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                    <button class="header-search-btn" id="productsSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="products-header">
+                    <button id="backBtn" class="back-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                        Назад
+                    </button>
+                    <h2 id="productsTitle" class="products-title">Товары</h2>
+                </div>
+                
+                <div class="products-controls">
+                    <div class="sort-dropdown">
+                        <button id="sortButton" class="sort-button">
+                            <span id="sortLabel">Сортировка</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"></polyline>
+                            </svg>
+                        </button>
+                        <div id="sortDropdown" class="sort-options hidden">
+                            <button class="sort-option" data-sort="name">Название А-Я</button>
+                            <button class="sort-option" data-sort="price-asc">Цена: по возрастанию</button>
+                            <button class="sort-option" data-sort="price-desc">Цена: по убыванию</button>
+                            <button class="sort-option" data-sort="brand">Бренд А-Я</button>
+                        </div>
+                    </div>
+                    <button id="openFilters" class="filters-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22,3 2,3 10,12.46 10,19 14,21 14,12.46 22,3"></polygon>
+                        </svg>
+                        Фильтры
+                    </button>
+                </div>
+
+                <!-- Active Filters -->
+                <div id="activeFilters" class="active-filters hidden">
+                    <div class="filter-tags"></div>
+                </div>
+                
+                <div id="productsGrid" class="products-grid"></div>
+                
+                <button id="loadMore" class="load-more-btn hidden">Загрузить еще</button>
+            </div>
+
+            <!-- Favorites Tab -->
+            <div id="favoritesTab" class="tab-content">
+                <div class="logo-header">
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
+                    <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                    <button class="header-search-btn" id="favoritesSearchBtn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="favoritesGrid" class="products-grid"></div>
+                
+                <div id="emptyFavorites" class="empty-state hidden">
+                    <div class="empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3>Нет избранных товаров</h3>
+                    <p>Добавляйте товары в избранное, нажимая на кнопку сердечка</p>
+                </div>
+            </div>
+
+            <!-- Account Tab -->
+            <div id="accountTab" class="tab-content">
+                <div class="logo-header">
+                    <img src="assets/logo.png" alt="Dolce Deals" class="logo-image">
+                    <div class="logo-subtitle">Премиальная мода из бутиков</div>
+                </div>
+                
+                <div class="account-content">
+                    <div class="account-card">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div class="user-details">
+                                <h3 id="userName">Пользователь</h3>
+                                <p id="userID">ID: 123456789</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="account-card">
+                        <div class="support-section">
+                            <div class="support-text">
+                                <h3>Круглосуточная поддержка</h3>
+                                <p>Мы всегда готовы помочь вам</p>
+                            </div>
+                            <button id="contactSupport" class="telegram-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12C24 5.373 18.627 0 12 0S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM12.43 8.859c-1.167.485-3.5 1.49-6.998 3.014-1.297.568-1.969.893-2.017 1.391-.054.573.605.765 1.536 1.096.282.1.582.21.892.33 1.189.4 2.734.847 3.587.847.741 0 1.574-.36 2.498-1.078.866-.672 1.742-1.349 2.632-2.031.378-.291.669-.496.935-.618.318-.146.571-.22.716-.22.288 0 .53.14.726.42.196.28.293.621.293 1.022v3.401c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382-.382 0-.714-.095-.996-.285a1.847 1.847 0 0 1-.627-.695c-.159-.294-.314-.631-.464-1.01-.102-.259-.193-.496-.273-.711-.08-.215-.14-.379-.18-.491-.04-.112-.07-.186-.092-.222-.021-.036-.035-.054-.041-.054-.006 0-.01.018-.013.054s-.005.09-.005.158v1.707c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382s-.778-.127-1.054-.382c-.276-.255-.414-.598-.414-1.029v-3.874c0-.403.097-.744.293-1.022.196-.28.438-.42.726-.42.145 0 .398.074.716.22.266.122.557.327.935.618.89.682 1.766 1.359 2.632 2.031.924.718 1.757 1.078 2.498 1.078.853 0 2.398-.447 3.587-.847.31-.12.61-.23.892-.33.931-.331 1.59-.523 1.536-1.096-.048-.498-.72-.823-2.017-1.391-3.498-1.524-5.831-2.529-6.998-3.014-.49-.204-.9-.307-1.228-.307s-.738.103-1.228.307z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="account-card">
+                        <h4>Загрузить товары</h4>
+                        <input type="file" id="fileUpload" class="file-input" accept=".json,.csv">
+                        <label for="fileUpload" class="upload-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Выбрать файл
+                        </label>
+                        <div id="uploadStatus" class="upload-status hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-tab="home">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9,22 9,12 15,12 15,22"></polyline>
+                    </svg>
+                </div>
+                <div class="nav-text">Главная</div>
+            </button>
+            <button class="nav-btn" data-tab="favorites">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                <div class="nav-text">Избранное</div>
+            </button>
+            <button class="nav-btn" data-tab="account">
+                <div class="nav-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="nav-text">Аккаунт</div>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/categories.js"></script>
+    <!-- Original App Script -->
+    <script src="app.js"></script>
+    
+    <!-- API Enhanced App Script -->
+    <script src="app_with_api.js"></script>
+    
+    <!-- API Status -->
+    <script>
+        // Добавляем статус API в приложение
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем кнопку синхронизации в аккаунт секцию
+            setTimeout(() => {
+                const accountContent = document.querySelector('#account .tab-content');
+                if (accountContent) {
+                    const apiSection = document.createElement('div');
+                    apiSection.innerHTML = `
+                        <div class="section">
+                            <h3>🔄 Синхронизация товаров</h3>
+                            <div id="apiStats"></div>
+                            <button id="syncButton" class="sync-button">
+                                Обновить товары из API
+                            </button>
+                        </div>
+                    `;
+                    accountContent.appendChild(apiSection);
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

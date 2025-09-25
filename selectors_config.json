@@ -1,0 +1,506 @@
+{
+  "farfetch.com": {
+    "name": {
+      "primary": [
+        "script[type='application/ld+json'] → name",
+        "meta[property='og:title']",
+        "title"
+      ],
+      "fallback": [
+        "[data-testid='product-short-description']",
+        ".ltr-13a5og8-Title",
+        ".ltr-i980jo.el610qn0",
+        "h1"
+      ]
+    },
+    "brand": {
+      "primary": [
+        "script[type='application/ld+json'] → brand.name",
+        "extract_from_name → first_word"
+      ],
+      "fallback": [
+        "[data-testid='brand-name']",
+        ".brand"
+      ]
+    },
+    "price": {
+      "primary": [
+        "meta[property='og:price:amount']",
+        "meta[property='product:custom_label_4']",
+        "script[type='application/ld+json'] → offers.price"
+      ],
+      "fallback": [
+        ".ltr-1uvoax5.ee85kz00",
+        ".ltr-mie4yz.e16jhb2m0",
+        "[class*='price']",
+        "[class*='Price']"
+      ]
+    },
+    "currency": {
+      "primary": [
+        "meta[property='og:price:currency']",
+        "script[type='application/ld+json'] → offers.priceCurrency"
+      ],
+      "fallback": ["EUR"]
+    },
+    "images": {
+      "primary": [
+        "script[type='application/ld+json'] → image",
+        "meta[property='og:image']"
+      ],
+      "fallback": [
+        "[data-testid='product-image'] img",
+        "img[src*='farfetch-contents.com']"
+      ]
+    },
+    "sizes": {
+      "primary": [
+        "[data-testid='ScaledSizeSelector']",
+        "[data-testid='variant-selector']"
+      ],
+      "fallback": [
+        ".size-option",
+        ".size-selector"
+      ]
+    },
+    "color": {
+      "primary": [
+        "script[type='application/ld+json'] → color",
+        "extract_from_name → color_pattern"
+      ],
+      "fallback": [
+        "[data-testid='variant-selector']",
+        ".color-name"
+      ]
+    },
+    "description": {
+      "primary": [
+        "script[type='application/ld+json'] → description",
+        "meta[name='description']"
+      ],
+      "fallback": [
+        "[data-testid='product-information-accordion']",
+        "[data-testid='product-short-description']"
+      ]
+    },
+    "availability": {
+      "primary": [
+        "meta[property='og:availability']",
+        "script[type='application/ld+json'] → offers.availability"
+      ],
+      "fallback": ["text_search → in_stock|available|out_of_stock"]
+    },
+    "discount_amount": {
+      "primary": [
+        "calculated → original_price - current_price"
+      ],
+      "fallback": [
+        "[class*='discount']",
+        "[class*='save']",
+        "[class*='off']",
+        ".discount-amount",
+        ".savings"
+      ]
+    },
+    "discount_percentage": {
+      "primary": [
+        "calculated → ((original_price - current_price) / original_price) * 100"
+      ],
+      "fallback": [
+        "[class*='discount']",
+        "[class*='percent']",
+        "[class*='off']",
+        ".discount-percentage",
+        ".percent-off"
+      ]
+    },
+    "catalog_selectors": {
+      "product_links": [
+        "[data-testid='product-card'] a[href*='/item-']",
+        "a[href*='/shopping/'][href*='/item-']",
+        ".product-card a",
+        "a[href*='item-']"
+      ],
+      "pagination": [
+        "a[aria-label*='next' i]",
+        "a[title*='next' i]",
+        ".pagination a[rel='next']",
+        ".pagination .next a",
+        "[data-testid*='next'] a"
+      ]
+    }
+  },
+  "bestsecret.com": {
+    "name": {
+      "primary": [
+        "[data-product-name]",
+        ".product-name",
+        ".product-title"
+      ],
+      "fallback": [
+        "h1",
+        ".product-details h1",
+        ".item-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        "[data-product-brand]",
+        ".brand-name",
+        ".product-brand"
+      ],
+      "fallback": [
+        ".designer-name",
+        ".vendor"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".t-price",
+        ".t-highlight",
+        ".price-current"
+      ],
+      "fallback": [
+        ".sale-price",
+        ".now-price"
+      ]
+    },
+    "old_price": {
+      "primary": [
+        ".t-value-old",
+        ".price-old",
+        ".original-price"
+      ],
+      "fallback": [
+        ".was-price",
+        ".crossed-price"
+      ]
+    },
+    "discount": {
+      "primary": [
+        ".t-savings",
+        ".discount-percent",
+        ".save-percent"
+      ],
+      "fallback": [
+        ".discount"
+      ]
+    },
+    "sizes": {
+      "primary": [
+        ".ui-selectmenu-text.input-mini.product-detail-size-selector",
+        "#productSize-menu .ui-menu-item-wrapper"
+      ],
+      "fallback": [
+        ".size-option:not(.disabled)",
+        ".size-list .available"
+      ]
+    },
+    "images": {
+      "primary": [
+        "[id^='pdp-image-gallery__image--']",
+        ".product-image img"
+      ],
+      "fallback": [
+        ".gallery-image img",
+        ".main-image img"
+      ]
+    },
+    "color": {
+      "primary": [
+        "[data-product-color]",
+        ".color-name"
+      ],
+      "fallback": [
+        ".product-color",
+        ".color-info"
+      ]
+    }
+  },
+  "antonioli.eu": {
+    "name": {
+      "primary": [
+        ".product-name",
+        ".pdp-product-name",
+        "h1.product-title"
+      ],
+      "fallback": [
+        ".product-info h1",
+        ".item-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        ".product-brand",
+        ".brand-name",
+        ".designer"
+      ],
+      "fallback": [
+        ".manufacturer",
+        ".vendor"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".price",
+        ".current-price",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    },
+    "old_price": {
+      "primary": [
+        ".old-price",
+        ".was-price",
+        ".original-price"
+      ],
+      "fallback": [
+        ".crossed-price",
+        "del .price"
+      ]
+    },
+    "sizes": {
+      "primary": [
+        ".size-selector option",
+        ".size-list .size-option"
+      ],
+      "fallback": [
+        ".product-sizes .size",
+        ".size-guide option"
+      ]
+    },
+    "images": {
+      "primary": [
+        ".product-gallery img",
+        ".main-product-image"
+      ],
+      "fallback": [
+        ".product-images img",
+        ".gallery-item img"
+      ]
+    }
+  },
+  "ssense.com": {
+    "name": {
+      "primary": [
+        "[data-testid='product-name']",
+        ".product-name",
+        "h1[data-testid='product-title']"
+      ],
+      "fallback": [
+        ".pdp-product-name",
+        ".item-title"
+      ]
+    },
+    "brand": {
+      "primary": [
+        "[data-testid='product-brand']",
+        ".designer-name",
+        ".brand"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".vendor-name"
+      ]
+    },
+    "price": {
+      "primary": [
+        "[data-testid='price']",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    },
+    "images": {
+      "primary": [
+        "[data-testid='product-image']",
+        ".product-gallery img"
+      ],
+      "fallback": [
+        ".pdp-images img",
+        ".main-image"
+      ]
+    }
+  },
+  "matchesfashion.com": {
+    "name": {
+      "primary": [
+        ".ProductPage_productName",
+        ".product-title",
+        "h1.product-name"
+      ],
+      "fallback": [
+        ".pdp-title",
+        ".item-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        ".ProductPage_designerName",
+        ".designer-link",
+        ".brand-name"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".manufacturer"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".ProductPage_price",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    }
+  },
+  "luisaviaroma.com": {
+    "name": {
+      "primary": [
+        ".lvr-product-name",
+        ".product-title",
+        "h1.pdp-title"
+      ],
+      "fallback": [
+        ".item-title",
+        ".product-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        ".lvr-designer-name",
+        ".brand-link",
+        ".designer"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".manufacturer"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".lvr-price",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    }
+  },
+  "mytheresa.com": {
+    "name": {
+      "primary": [
+        "[data-testid='pdp-product-name']",
+        ".product-name",
+        "h1.pdp-title"
+      ],
+      "fallback": [
+        ".item-title",
+        ".product-title"
+      ]
+    },
+    "brand": {
+      "primary": [
+        "[data-testid='pdp-brand-name']",
+        ".designer-name",
+        ".brand-link"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".manufacturer"
+      ]
+    },
+    "price": {
+      "primary": [
+        "[data-testid='price-current']",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    }
+  },
+  "netaporter.com": {
+    "name": {
+      "primary": [
+        ".ProductSummary_name",
+        ".product-name",
+        "h1.product-title"
+      ],
+      "fallback": [
+        ".pdp-title",
+        ".item-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        ".ProductSummary_designer",
+        ".designer-name",
+        ".brand-link"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".manufacturer"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".ProductSummary_price",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    }
+  },
+  "mrporter.com": {
+    "name": {
+      "primary": [
+        ".ProductSummary_name",
+        ".product-name",
+        "h1.product-title"
+      ],
+      "fallback": [
+        ".pdp-title",
+        ".item-name"
+      ]
+    },
+    "brand": {
+      "primary": [
+        ".ProductSummary_designer",
+        ".designer-name",
+        ".brand-link"
+      ],
+      "fallback": [
+        ".product-brand",
+        ".manufacturer"
+      ]
+    },
+    "price": {
+      "primary": [
+        ".ProductSummary_price",
+        ".price-current",
+        ".sale-price"
+      ],
+      "fallback": [
+        ".product-price",
+        ".final-price"
+      ]
+    }
+  }
+}

@@ -1,0 +1,184 @@
+[
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=40299425&colorCode=000478088",
+    "site": "BestSecret",
+    "sku": "BS-20250925141444-2a488a",
+    "parsed_at": "2025-09-25T14:14:44.712979",
+    "name": "Sneakers",
+    "brand": "Off-White",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "White",
+    "description": "Off-WhiteSneakersRRP 590,00 €-53%*279,00 €Colour:WhiteSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 40299425Sneakers by Off-WhiteManufacturer's item number:OWIA112C99LEA002Information on product safetyFit & MeasurementsMeasurements for size 39:increased sole at the heel 3,5 cmPlatform height:3cmBoot leg height:12,5cmMaterials & CareOutsole:syntheticInner material:leather, textileOuter material:leather, textile",
+    "current_price": 279.0,
+    "original_price": 590.0,
+    "currency": "EUR",
+    "discount_amount": 311.0,
+    "discount_percentage": 52.71,
+    "available_sizes": [
+      "EU 35",
+      "EU 36",
+      "EU 37"
+    ],
+    "out_of_stock_sizes": [
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41",
+      "EU 42"
+    ],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": [
+      "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg"
+    ]
+  },
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=32977067&colorCode=91",
+    "site": "BestSecret",
+    "sku": "BS-20250925140822-71191a",
+    "parsed_at": "2025-09-25T14:08:22.216436",
+    "name": "Down parka",
+    "brand": "Canada Goose",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "White",
+    "description": "Canada GooseDown parkaRRP 1.495,00 €-60%*599,00 €Colour:WhiteSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 32977067Down parka by Canada GooseManufacturer's item number:3802W1Manufacturer's care instructions:dry cleanInformation on product safetyFit & MeasurementsMeasurements for size M:garment length 89 cm, sleeve length 64 cmOur model is wearing:MSize of our model:175 cmMaterials & CareOuter material:84% polyester, 16% cottonPadding:80% duck down, 20% duck feathersLining II:100% polyamideLining material:100% polyamide",
+    "current_price": 599.0,
+    "original_price": 1495.0,
+    "currency": "EUR",
+    "discount_amount": 896.0,
+    "discount_percentage": 59.93,
+    "available_sizes": [
+      "XXS",
+      "XS",
+      "M",
+      "L",
+      "XXL"
+    ],
+    "out_of_stock_sizes": [
+      "S",
+      "XL",
+      "XXXL"
+    ],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": [
+      "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg"
+    ]
+  },
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=40102661&colorCode=000160173",
+    "site": "BestSecret",
+    "sku": "BS-20250925110734-6cebc9",
+    "parsed_at": "2025-09-25T11:07:34.073357",
+    "name": "Ankle-boots",
+    "brand": "Gucci",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "Black",
+    "description": "GucciAnkle-bootsRRP 1.190,00 €-42%*685,00 €Colour:BlackSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 40102661Ankle-boots by GucciManufacturer's item number:701100UVV20Pattern:patternedExtras:monogram(s), belt detailingInformation on product safetyFit & MeasurementsHeel height:9cmSole height:2.5cmBoot leg height:13cmMaterials & CareOutsole:syntheticInner material:textileOuter material:leather",
+    "current_price": 685.0,
+    "original_price": 1190.0,
+    "currency": "EUR",
+    "discount_amount": 505.0,
+    "discount_percentage": 42.44,
+    "available_sizes": [],
+    "out_of_stock_sizes": [],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": [
+      "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg"
+    ]
+  },
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=32068480&colorCode=10",
+    "site": "BestSecret",
+    "sku": "BS-20250925141452-fe0bfb",
+    "parsed_at": "2025-09-25T14:14:52.644503",
+    "name": "Ankle boots",
+    "brand": "See by Chloé",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "Black",
+    "description": "See by ChloéAnkle bootsRRP 525,00 €-58%*219,00 €Colours:BlackCaviar BlackNougatOchreSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 32068480Ankle boots by See by ChloéManufacturer's item number:SB33080AInformation on product safetyFit & MeasurementsMeasurements for size 37:lenght 25 cm, increased sole at the heel 5 cmMaterials & CareOutsole:syntheticOuter material:leatherInner material:leather",
+    "current_price": 219.0,
+    "original_price": 525.0,
+    "currency": "EUR",
+    "discount_amount": 306.0,
+    "discount_percentage": 58.29,
+    "available_sizes": [
+      "EU 41"
+    ],
+    "out_of_stock_sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40"
+    ],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": [
+      "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg"
+    ]
+  },
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=40384865&colorCode=000614496&position=1&back_url=%2Fhome.htm&listName=Favourite+Designer",
+    "site": "BestSecret",
+    "sku": "BS-20250925141518-ea1e51",
+    "parsed_at": "2025-09-25T14:15:18.535060",
+    "name": "Denim Bermuda",
+    "brand": "Gucci",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "Blue",
+    "description": "GucciDenim BermudaRRP 980,00 €-60%*389,00 €Colour:BlueSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 40384865Denim Bermuda by GucciManufacturer's item number:738670XDCFVWaistband:belt loop(s)Extras:logo labelPockets:rear buttoned welt pocket(s), side slit pocket(s)Closure:zip with button on waistbandInformation on product safetyFit & MeasurementsMeasurements for size 48:rise 34 cm, waist 86 cm, inside leg 24 cm, total length 55 cm, leg width 66 cmOur model is wearing:48Size of our model:185 cmMaterials & CareManufacturer's care instructions:dry clean onlyLining:100% cottonOther materials:100% calf leatherMaterial:100% cotton",
+    "current_price": 389.0,
+    "original_price": 980.0,
+    "currency": "EUR",
+    "discount_amount": 591.0,
+    "discount_percentage": 60.31,
+    "available_sizes": [
+      "EU 48"
+    ],
+    "out_of_stock_sizes": [],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": [
+      "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg"
+    ]
+  },
+  {
+    "url": "https://www.bestsecret.com/product.htm?code=40501777&colorCode=000790154&position=2&back_url=%2Fhome.htm&listName=Favourite+Designer",
+    "site": "BestSecret",
+    "sku": "BS-20250925141529-875251",
+    "parsed_at": "2025-09-25T14:15:29.589568",
+    "name": "Denim shirt",
+    "brand": "Gucci",
+    "category": null,
+    "subcategory": null,
+    "gender": null,
+    "color": "Midnight Blue",
+    "description": "GucciDenim shirtRRP 850,00 €-27%*619,00 €Colour:Midnight BlueSelect your sizeAdd to cartPrices include VAT - excludingshippingFree returnsSecurepayment optionsProduct InformationItem number: 40501777Denim shirt by GucciManufacturer's item number:782744XDCWQ4759Collar:kent collarPattern:patternedSleeves:short sleevesPockets:patch pocket(s)Fastening:continuous button placketInformation on product safetyFit & MeasurementsMeasurements for size 50:total length 86 cm, sleeve length 38 cmOur model is wearing:50Size of our model:188 cmMaterials & CareManufacturer's care instructions:dry clean, do not bleachMaterial composition:100% cotton",
+    "current_price": 619.0,
+    "original_price": 850.0,
+    "currency": "EUR",
+    "discount_amount": 231.0,
+    "discount_percentage": 27.18,
+    "available_sizes": [
+      "EU 46",
+      "EU 48",
+      "EU 50"
+    ],
+    "out_of_stock_sizes": [],
+    "in_stock": true,
+    "stock_level": "in_stock",
+    "image_urls": []
+  }
+]

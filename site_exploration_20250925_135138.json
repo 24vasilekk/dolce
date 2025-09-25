@@ -1,0 +1,717 @@
+{
+  "timestamp": "2025-09-25T13:50:54.687896",
+  "header_structure": {
+    "header": {
+      "found": true,
+      "navigation_elements": [
+        {
+          "tag": "div",
+          "classes": [
+            "gender-switch-container"
+          ],
+          "id": null,
+          "children_count": 3
+        },
+        {
+          "tag": "nav",
+          "classes": [
+            "gender-switch-with-dropdown"
+          ],
+          "id": null,
+          "children_count": 3
+        },
+        {
+          "tag": "div",
+          "classes": [
+            "gender-switch-links"
+          ],
+          "id": null,
+          "children_count": 3
+        },
+        {
+          "tag": "div",
+          "classes": [
+            "tt-menu"
+          ],
+          "id": null,
+          "children_count": 0
+        },
+        {
+          "tag": "nav",
+          "classes": [
+            "category-navbar"
+          ],
+          "id": null,
+          "children_count": 8
+        },
+        {
+          "tag": "div",
+          "classes": [
+            "category-navbar__scroll-container"
+          ],
+          "id": null,
+          "children_count": 8
+        }
+      ]
+    }
+  },
+  "navigation": {
+    "found_elements": [
+      {
+        "selector": "nav",
+        "text_content": "WOMEN\nMEN\nKIDS",
+        "id": "",
+        "classes": "gender-switch-with-dropdown",
+        "tag_name": "nav",
+        "children_count": 8
+      },
+      {
+        "selector": "nav",
+        "text_content": "Home\nLuxury\nClothing\nShoes\nSports\nAccessories\nDesigners\nPreview",
+        "id": "",
+        "classes": "category-navbar",
+        "tag_name": "nav",
+        "children_count": 24
+      },
+      {
+        "selector": "nav",
+        "text_content": "Language\nLanguage\nDeutsch \nEnglish ",
+        "id": "",
+        "classes": "footer-section footer-centered",
+        "tag_name": "nav",
+        "children_count": 8
+      },
+      {
+        "selector": "nav",
+        "text_content": "Customer service\nHelpShippingReturnVouchersNewsletter",
+        "id": "",
+        "classes": "footer-section footer-centered",
+        "tag_name": "nav",
+        "children_count": 6
+      },
+      {
+        "selector": "nav",
+        "text_content": "About BESTSECRET\nCareersCorporate WebsiteCookie settingsPrivacy PolicyTerms and ConditionsImprint",
+        "id": "",
+        "classes": "footer-section footer-centered",
+        "tag_name": "nav",
+        "children_count": 7
+      },
+      {
+        "selector": "nav",
+        "text_content": "You can also find us on",
+        "id": "",
+        "classes": "footer-section",
+        "tag_name": "nav",
+        "children_count": 31
+      },
+      {
+        "selector": "nav",
+        "text_content": "Payment methods",
+        "id": "",
+        "classes": "footer-section",
+        "tag_name": "nav",
+        "children_count": 54
+      },
+      {
+        "selector": "nav",
+        "text_content": "Delivery Partners",
+        "id": "",
+        "classes": "footer-section",
+        "tag_name": "nav",
+        "children_count": 14
+      },
+      {
+        "selector": "[class*='nav']",
+        "text_content": "Home\nLuxury\nClothing\nShoes\nSports\nAccessories\nDesigners\nPreview",
+        "id": "",
+        "classes": "category-navbar",
+        "tag_name": "nav",
+        "children_count": 24
+      },
+      {
+        "selector": "[class*='nav']",
+        "text_content": "Home\nLuxury\nClothing\nShoes\nSports\nAccessories\nDesigners\nPreview",
+        "id": "",
+        "classes": "category-navbar__scroll-container",
+        "tag_name": "div",
+        "children_count": 17
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home\nLuxury\nClothing\nShoes\nSports\nAccessories\nDesigners\nPreview",
+        "id": "",
+        "classes": "category-navbar",
+        "tag_name": "nav",
+        "children_count": 24
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home\nLuxury\nClothing\nShoes\nSports\nAccessories\nDesigners\nPreview",
+        "id": "",
+        "classes": "category-navbar__scroll-container",
+        "tag_name": "div",
+        "children_count": 17
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "",
+        "classes": "category active",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "gtm-category-navigation-WOMEN_NEW_1",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Luxury",
+        "id": "",
+        "classes": "category luxury",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Luxury",
+        "id": "gtm-category-navigation-WOMEN_LUXURY_2",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Clothing",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Clothing",
+        "id": "gtm-category-navigation-WOMEN_CLOTHING_3",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Shoes",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Shoes",
+        "id": "gtm-category-navigation-WOMEN_SHOES_4",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sports",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sports",
+        "id": "gtm-category-navigation-WOMEN_SPORTS_5",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Accessories",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Accessories",
+        "id": "gtm-category-navigation-WOMEN_ACCESSORIES_6",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Designers",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Designers",
+        "id": "gtm-category-navigation-WOMEN_DESIGNER_7",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Preview",
+        "id": "",
+        "classes": "category",
+        "tag_name": "li",
+        "children_count": 1
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Preview",
+        "id": "gtm-category-navigation-WOMEN_PREVIEW_8",
+        "classes": "category-link",
+        "tag_name": "a",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "EXPLORE OUR SHOP",
+        "id": "",
+        "classes": "category-quick-link-headline",
+        "tag_name": "div",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Knitwear\nSneakers\nTransitional Jackets\nBags\nOutdoor\nHome",
+        "id": "",
+        "classes": "category-quick-link-slider",
+        "tag_name": "ul",
+        "children_count": 31
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Knitwear",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Knitwear",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Knitwear",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Knitwear",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sneakers",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sneakers",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sneakers",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Sneakers",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Transitional Jackets",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Transitional Jackets",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Transitional Jackets",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Transitional Jackets",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Bags",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Bags",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Bags",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Bags",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Outdoor",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Outdoor",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Outdoor",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Outdoor",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "",
+        "classes": "category-quick-link-slider__item",
+        "tag_name": "li",
+        "children_count": 4
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "",
+        "classes": "category-quick-link--link category-quick-link-tile",
+        "tag_name": "a",
+        "children_count": 3
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "",
+        "classes": "category-quick-link--figure",
+        "tag_name": "figure",
+        "children_count": 2
+      },
+      {
+        "selector": "[class*='category']",
+        "text_content": "Home",
+        "id": "",
+        "classes": "category-quick-link-tile--caption",
+        "tag_name": "figcaption",
+        "children_count": 0
+      }
+    ]
+  },
+  "categories": {
+    "potential_category_links": [
+      {
+        "text": "",
+        "href": "https://www.bestsecret.com/recommendation.htm",
+        "css_selector": "#menu-overlay > DIV:nth-child(3) > DIV:nth-child(1) > A:nth-child(1)",
+        "classes": ""
+      },
+      {
+        "text": "WOMEN",
+        "href": "https://www.bestsecret.com/new.htm?gender=FEMALE&storeGender=true",
+        "css_selector": "#app > HEADER:nth-child(1) > DIV:nth-child(3) > DIV:nth-child(1) > NAV:nth-child(1) > DIV:nth-child(3) > A:nth-child(1)",
+        "classes": "active"
+      },
+      {
+        "text": "MEN",
+        "href": "https://www.bestsecret.com/new.htm?gender=MALE&storeGender=true",
+        "css_selector": "#app > HEADER:nth-child(1) > DIV:nth-child(3) > DIV:nth-child(1) > NAV:nth-child(1) > DIV:nth-child(3) > A:nth-child(2)",
+        "classes": ""
+      },
+      {
+        "text": "KIDS",
+        "href": "https://www.bestsecret.com/new.htm?gender=KIDS&storeGender=true",
+        "css_selector": "#app > HEADER:nth-child(1) > DIV:nth-child(3) > DIV:nth-child(1) > NAV:nth-child(1) > DIV:nth-child(3) > A:nth-child(3)",
+        "classes": ""
+      },
+      {
+        "text": "",
+        "href": "https://www.bestsecret.com/recommendation.htm",
+        "css_selector": "#app > HEADER:nth-child(1) > DIV:nth-child(3) > DIV:nth-child(5) > A:nth-child(2)",
+        "classes": "recommendation clickable-svg-icon"
+      },
+      {
+        "text": "20% per invite",
+        "href": "https://www.bestsecret.com/recommendation.htm",
+        "css_selector": "#app > HEADER:nth-child(1) > DIV:nth-child(3) > UL:nth-child(6) > LI:nth-child(1) > A:nth-child(1)",
+        "classes": "clickable-svg-icon"
+      },
+      {
+        "text": "Home",
+        "href": "https://www.bestsecret.com/new.htm?gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_NEW_1",
+        "classes": "category-link"
+      },
+      {
+        "text": "Luxury",
+        "href": "https://www.bestsecret.com/category.htm?category=women&gender=FEMALE&area=WOMEN_LUXURY",
+        "css_selector": "#gtm-category-navigation-WOMEN_LUXURY_2",
+        "classes": "category-link"
+      },
+      {
+        "text": "Clothing",
+        "href": "https://www.bestsecret.com/category.htm?category=women_bekleidung&gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_CLOTHING_3",
+        "classes": "category-link"
+      },
+      {
+        "text": "Shoes",
+        "href": "https://www.bestsecret.com/category.htm?category=women_schuhe&gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_SHOES_4",
+        "classes": "category-link"
+      },
+      {
+        "text": "Sports",
+        "href": "https://www.bestsecret.com/category.htm?category=women_sport&gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_SPORTS_5",
+        "classes": "category-link"
+      },
+      {
+        "text": "Accessories",
+        "href": "https://www.bestsecret.com/category.htm?category=women_accessoires&gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_ACCESSORIES_6",
+        "classes": "category-link"
+      },
+      {
+        "text": "Designers",
+        "href": "https://www.bestsecret.com/designer.htm?gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_DESIGNER_7",
+        "classes": "category-link"
+      },
+      {
+        "text": "Preview",
+        "href": "https://www.bestsecret.com/preview.htm?gender=FEMALE",
+        "css_selector": "#gtm-category-navigation-WOMEN_PREVIEW_8",
+        "classes": "category-link"
+      },
+      {
+        "text": "",
+        "href": "https://www.bestsecret.com/new.htm?gender=FEMALE&storeGender=true",
+        "css_selector": "#app > DIV:nth-child(2) > NAV:nth-child(1) > A:nth-child(1)",
+        "classes": "active"
+      },
+      {
+        "text": "",
+        "href": "https://www.bestsecret.com/new.htm?gender=MALE&storeGender=true",
+        "css_selector": "#app > DIV:nth-child(2) > NAV:nth-child(1) > A:nth-child(2)",
+        "classes": ""
+      },
+      {
+        "text": "",
+        "href": "https://www.bestsecret.com/new.htm?gender=KIDS&storeGender=true",
+        "css_selector": "#app > DIV:nth-child(2) > NAV:nth-child(1) > A:nth-child(3)",
+        "classes": ""
+      },
+      {
+        "text": "JUST IN\nadidas T-Toes\nUP TO 35% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190932&gender=FEMALE",
+        "css_selector": "#campaign_190932 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "JUST IN\nadidas\nUP TO 35% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190651&gender=FEMALE",
+        "css_selector": "#campaign_190651 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "MEMBERS' CHOICE\nSports Brands\nUP TO 55% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190376&gender=FEMALE",
+        "css_selector": "#campaign_190376 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Italian Premium Brands\nUP TO 75% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190887&gender=FEMALE",
+        "css_selector": "#campaign_190887 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Chelsea Boots\nUP TO 65% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190671&gender=FEMALE",
+        "css_selector": "#campaign_190671 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "JUST IN\nNew styles\nUP TO 55% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190669&gender=FEMALE",
+        "css_selector": "#campaign_190669 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "JUST IN\nThe Coats of the Season\nUP TO 70% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190795&gender=FEMALE",
+        "css_selector": "#campaign_190795 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Trend Colour: Brown\nUP TO 65% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_191005&gender=FEMALE",
+        "css_selector": "#campaign_191005 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Everyday Looks\nUP TO 75% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190743&gender=FEMALE",
+        "css_selector": "#campaign_190743 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "JUST IN\nPaul Neuhaus\nUP TO 40% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_190776&gender=FEMALE",
+        "css_selector": "#campaign_190776 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Daniel Wellington",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_191004&gender=FEMALE",
+        "css_selector": "#campaign_191004 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "Earrings\nUP TO 55% OFF*",
+        "href": "https://www.bestsecret.com/new_category.htm?shop=campaign_191011&gender=FEMALE",
+        "css_selector": "#campaign_191011 > A:nth-child(1)",
+        "classes": "campaign-link"
+      },
+      {
+        "text": "ALL NEW PRODUCTS OF TODAY",
+        "href": "https://www.bestsecret.com/today.htm?gender=WOMEN&v5=News%3ACampaignday%3A20250925%3A1",
+        "css_selector": "#20250925 > DIV:nth-child(15) > A:nth-child(1)",
+        "classes": "daily-campaign-link"
+      },
+      {
+        "text": "Knitwear",
+        "href": "https://www.bestsecret.com/category.htm?category=women_bekleidung_strick&back_url=%2Fnew.htm",
+        "css_selector": "#category-quick-links > ASTRO-ISLAND:nth-child(1) > ARTICLE:nth-child(1) > UL:nth-child(2) > LI:nth-child(1) > A:nth-child(1)",
+        "classes": "category-quick-link--link category-quick-link-tile"
+      },
+      {
+        "text": "Sneakers",
+        "href": "https://www.bestsecret.com/category.htm?category=women_schuhe_sneaker&back_url=%2Fnew.htm",
+        "css_selector": "#category-quick-links > ASTRO-ISLAND:nth-child(1) > ARTICLE:nth-child(1) > UL:nth-child(2) > LI:nth-child(2) > A:nth-child(1)",
+        "classes": "category-quick-link--link category-quick-link-tile"
+      },
+      {
+        "text": "Transitional Jackets",
+        "href": "https://www.bestsecret.com/category.htm?category=women_bekleidung_jacken_leichtejacken&back_url=%2Fnew.htm",
+        "css_selector": "#category-quick-links > ASTRO-ISLAND:nth-child(1) > ARTICLE:nth-child(1) > UL:nth-child(2) > LI:nth-child(3) > A:nth-child(1)",
+        "classes": "category-quick-link--link category-quick-link-tile"
+      }
+    ]
+  },
+  "product_page": {},
+  "filters": {
+    "luxury_section": [
+      {
+        "selector": "[class*='dropdown']",
+        "id": "",
+        "classes": "gender-switch-with-dropdown",
+        "text": "WOMEN\nMEN\nKIDS",
+        "tag": "nav"
+      },
+      {
+        "selector": "select",
+        "id": "languageSwitcher",
+        "classes": "language-switcher__input",
+        "text": "Deutsch \nEnglish",
+        "tag": "select"
+      }
+    ]
+  },
+  "size_selectors": [],
+  "page_structures": {}
+}

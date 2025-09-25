@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1000,
+    "name": "Sneakers",
+    "brand": "Off-White",
+    "price": 59000,
+    "image": "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg",
+    "gender": "men",
+    "category": "shoes",
+    "subcategory": "Кроссовки и кеды",
+    "colors": [
+      "white"
+    ],
+    "sizes": [
+      "35",
+      "36",
+      "37"
+    ],
+    "materials": [
+      "Кожа",
+      "Синтетика",
+      "Текстиль"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=40299425&colorCode=000478088",
+    "parsed_at": "2025-09-25T14:14:44.712979",
+    "salePrice": 27900,
+    "onSale": true
+  },
+  {
+    "id": 1001,
+    "name": "Down parka",
+    "brand": "Canada Goose",
+    "price": 149500,
+    "image": "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg",
+    "gender": "men",
+    "category": "clothing",
+    "subcategory": "Верхняя одежда",
+    "colors": [
+      "white"
+    ],
+    "sizes": [
+      "XXS",
+      "XS",
+      "M",
+      "L",
+      "XXL"
+    ],
+    "materials": [
+      "Хлопок",
+      "Полиэстер",
+      "Полиамид",
+      "Пух",
+      "Перо"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=32977067&colorCode=91",
+    "parsed_at": "2025-09-25T14:08:22.216436",
+    "salePrice": 59900,
+    "onSale": true
+  },
+  {
+    "id": 1002,
+    "name": "Ankle-boots",
+    "brand": "Gucci",
+    "price": 119000,
+    "image": "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg",
+    "gender": "men",
+    "category": "shoes",
+    "subcategory": "Ботинки",
+    "colors": [
+      "black"
+    ],
+    "sizes": [
+      "M"
+    ],
+    "materials": [
+      "Кожа",
+      "Синтетика",
+      "Текстиль"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=40102661&colorCode=000160173",
+    "parsed_at": "2025-09-25T11:07:34.073357",
+    "salePrice": 68500,
+    "onSale": true
+  },
+  {
+    "id": 1003,
+    "name": "Ankle boots",
+    "brand": "See by Chloé",
+    "price": 52500,
+    "image": "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg",
+    "gender": "men",
+    "category": "shoes",
+    "subcategory": "Ботинки",
+    "colors": [
+      "black"
+    ],
+    "sizes": [
+      "41"
+    ],
+    "materials": [
+      "Кожа",
+      "Синтетика"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=32068480&colorCode=10",
+    "parsed_at": "2025-09-25T14:14:52.644503",
+    "salePrice": 21900,
+    "onSale": true
+  },
+  {
+    "id": 1004,
+    "name": "Denim Bermuda",
+    "brand": "Gucci",
+    "price": 98000,
+    "image": "https://picture.bestsecret.com/static/images/3367/image_40382827_000773052_352x429_0.jpg",
+    "gender": "men",
+    "category": "clothing",
+    "subcategory": "Шорты",
+    "colors": [
+      "blue"
+    ],
+    "sizes": [
+      "48"
+    ],
+    "materials": [
+      "Хлопок",
+      "Кожа",
+      "Деним"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=40384865&colorCode=000614496&position=1&back_url=%2Fhome.htm&listName=Favourite+Designer",
+    "parsed_at": "2025-09-25T14:15:18.535060",
+    "salePrice": 38900,
+    "onSale": true
+  },
+  {
+    "id": 1005,
+    "name": "Denim shirt",
+    "brand": "Gucci",
+    "price": 85000,
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop",
+    "gender": "men",
+    "category": "clothing",
+    "subcategory": "Рубашки",
+    "colors": [
+      "blue"
+    ],
+    "sizes": [
+      "46",
+      "48",
+      "50"
+    ],
+    "materials": [
+      "Хлопок",
+      "Деним"
+    ],
+    "description": "",
+    "source": "BestSecret",
+    "source_url": "https://www.bestsecret.com/product.htm?code=40501777&colorCode=000790154&position=2&back_url=%2Fhome.htm&listName=Favourite+Designer",
+    "parsed_at": "2025-09-25T14:15:29.589568",
+    "salePrice": 61900,
+    "onSale": true
+  }
+]
