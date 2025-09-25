@@ -1,4 +1,4 @@
-// Dolce Deals Fashion App - Обновленная версия
+// Dolce Deals Fashion App - Обновленная версия с улучшенным модальным окном
 class FashionApp {
     constructor() {
         this.currentTab = 'home';
@@ -146,7 +146,7 @@ class FashionApp {
             document.getElementById('loadMore').addEventListener('click', () => this.loadMore());
         }
 
-        // Product Detail Modal
+        // Product Detail Modal - обновленные обработчики
         if (document.getElementById('productDetailFavorite')) {
             document.getElementById('productDetailFavorite').addEventListener('click', () => {
                 if (this.currentProduct) {
@@ -159,6 +159,14 @@ class FashionApp {
             document.getElementById('productDetailBuy').addEventListener('click', () => {
                 if (this.currentProduct) {
                     this.buyProduct(this.currentProduct);
+                }
+            });
+        }
+
+        if (document.getElementById('productDetailShare')) {
+            document.getElementById('productDetailShare').addEventListener('click', () => {
+                if (this.currentProduct) {
+                    this.shareProduct(this.currentProduct);
                 }
             });
         }
@@ -536,7 +544,7 @@ class FashionApp {
         return card;
     }
 
-    // Открытие детального просмотра товара
+    // ОБНОВЛЕННОЕ ОТКРЫТИЕ ДЕТАЛЬНОГО ПРОСМОТРА ТОВАРА
     openProductDetail(product) {
         this.currentProduct = product;
         
@@ -545,32 +553,28 @@ class FashionApp {
         document.getElementById('productDetailImage').alt = product.name;
         document.getElementById('productDetailBrand').textContent = product.brand;
         document.getElementById('productDetailName').textContent = product.name;
-        document.getElementById('productDetailDescription').textContent = product.description;
+        document.getElementById('productDetailDescription').textContent = product.description || 'Описание товара будет добавлено позже.';
         
-        // Цена
+        // Цена с улучшенным форматированием
         const priceEl = document.getElementById('productDetailPrice');
         const price = product.onSale ? product.salePrice : product.price;
         const originalPrice = product.onSale ? product.price : null;
         
-        priceEl.innerHTML = `
-            ${this.formatPrice(price)}
-            ${originalPrice ? `<span class="original-price">${this.formatPrice(originalPrice)}</span>` : ''}
-        `;
+        let priceHtml = this.formatPrice(price);
         
-        // Размеры
-        const sizesContainer = document.getElementById('productDetailSizes');
-        sizesContainer.innerHTML = '';
+        if (originalPrice) {
+            const discount = Math.round(((originalPrice - price) / originalPrice) * 100);
+            priceHtml += `<span class="product-detail-original-price">${this.formatPrice(originalPrice)}</span>`;
+            priceHtml += `<span class="product-detail-sale-badge">-${discount}%</span>`;
+        }
         
-        product.sizes.forEach(size => {
-            const sizeBtn = document.createElement('button');
-            sizeBtn.className = 'size-option';
-            sizeBtn.textContent = size;
-            sizeBtn.addEventListener('click', () => {
-                sizesContainer.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('selected'));
-                sizeBtn.classList.add('selected');
-            });
-            sizesContainer.appendChild(sizeBtn);
-        });
+        priceEl.innerHTML = priceHtml;
+        
+        // Размеры с улучшенным интерфейсом
+        this.renderProductSizes(product);
+        
+        // Характеристики товара
+        this.renderProductSpecs(product);
         
         // Кнопка избранного
         const favoriteBtn = document.getElementById('productDetailFavorite');
@@ -588,7 +592,76 @@ class FashionApp {
         document.getElementById('productDetailModal').classList.remove('hidden');
     }
 
-    // Отображение похожих товаров
+    // Отрисовка размеров товара
+    renderProductSizes(product) {
+        const sizesContainer = document.getElementById('productDetailSizes');
+        sizesContainer.innerHTML = '';
+        
+        product.sizes.forEach(size => {
+            const sizeBtn = document.createElement('button');
+            sizeBtn.className = 'size-option';
+            sizeBtn.textContent = size;
+            sizeBtn.addEventListener('click', () => {
+                sizesContainer.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('selected'));
+                sizeBtn.classList.add('selected');
+            });
+            sizesContainer.appendChild(sizeBtn);
+        });
+    }
+
+    // Отрисовка характеристик товара
+    renderProductSpecs(product) {
+        const specsContainer = document.getElementById('productDetailSpecs');
+        specsContainer.innerHTML = '';
+
+        // Материалы
+        if (product.materials && product.materials.length > 0) {
+            const materialSpec = this.createSpecItem('Материал', product.materials.join(', '));
+            specsContainer.appendChild(materialSpec);
+        }
+
+        // Цвета
+        if (product.colors && product.colors.length > 0) {
+            const colorSpec = document.createElement('div');
+            colorSpec.className = 'spec-item';
+            colorSpec.innerHTML = `
+                <span class="spec-label">Цвета</span>
+                <div class="spec-value">
+                    <div class="color-swatches">
+                        ${product.colors.map(color => {
+                            const colorData = COLORS.find(c => c.value === color);
+                            const colorHex = colorData ? colorData.hex : '#' + color;
+                            return `<div class="color-swatch" style="background: ${colorHex};" title="${colorData ? colorData.name : color}"></div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            specsContainer.appendChild(colorSpec);
+        }
+
+        // Артикул
+        const articleSpec = this.createSpecItem('Артикул', `${product.brand.substring(0, 2).toUpperCase()}-${product.id.toString().padStart(6, '0')}`);
+        specsContainer.appendChild(articleSpec);
+
+        // Коллекция/Категория
+        if (product.subcategory) {
+            const categorySpec = this.createSpecItem('Коллекция', product.subcategory);
+            specsContainer.appendChild(categorySpec);
+        }
+    }
+
+    // Создание элемента характеристики
+    createSpecItem(label, value) {
+        const specItem = document.createElement('div');
+        specItem.className = 'spec-item';
+        specItem.innerHTML = `
+            <span class="spec-label">${label}</span>
+            <span class="spec-value">${value}</span>
+        `;
+        return specItem;
+    }
+
+    // Отображение похожих товаров (улучшенная версия)
     renderSimilarProducts(currentProduct) {
         const container = document.getElementById('similarProductsGrid');
         container.innerHTML = '';
@@ -598,6 +671,13 @@ class FashionApp {
         
         // Ограничить до 4 товаров
         similarProducts = similarProducts.slice(0, 4);
+        
+        if (similarProducts.length === 0) {
+            // Если похожих товаров нет, показать случайные из той же категории
+            similarProducts = this.products
+                .filter(p => p.id !== currentProduct.id && p.gender === currentProduct.gender)
+                .slice(0, 4);
+        }
         
         similarProducts.forEach(product => {
             const similarCard = document.createElement('div');
@@ -622,7 +702,7 @@ class FashionApp {
         });
     }
 
-    // Поиск похожих товаров
+    // Поиск похожих товаров (улучшенный алгоритм)
     findSimilarProducts(currentProduct) {
         const allProducts = this.products.filter(p => p.id !== currentProduct.id);
         
@@ -644,8 +724,14 @@ class FashionApp {
             p.gender === currentProduct.gender
         );
         
+        // Приоритет 3: Тот же бренд
+        const sameBrand = allProducts.filter(p => 
+            p.brand === currentProduct.brand &&
+            p.gender === currentProduct.gender
+        );
+        
         // Объединить результаты
-        const combined = [...sameBrandSimilarName, ...sameCategorySubcategory];
+        const combined = [...sameBrandSimilarName, ...sameCategorySubcategory, ...sameBrand];
         const unique = combined.filter((product, index, self) => 
             index === self.findIndex(p => p.id === product.id)
         );
@@ -654,7 +740,7 @@ class FashionApp {
             return unique;
         }
         
-        // Приоритет 3: Та же категория
+        // Приоритет 4: Та же категория
         const sameCategory = allProducts.filter(p => 
             p.category === currentProduct.category &&
             p.gender === currentProduct.gender
@@ -666,7 +752,7 @@ class FashionApp {
         );
     }
 
-    // Проверка схожести названий
+    // Проверка схожести названий (улучшенная версия)
     isSimilarName(name1, name2) {
         const words1 = name1.toLowerCase().split(' ');
         const words2 = name2.toLowerCase().split(' ');
@@ -678,25 +764,103 @@ class FashionApp {
         return commonWords.length >= 2 || commonWords.some(word => word.length > 4);
     }
 
-    // Покупка товара
+    // НОВАЯ ФУНКЦИЯ: Поделиться товаром
+    shareProduct(product) {
+        const shareData = {
+            title: `${product.brand} - ${product.name}`,
+            text: `Посмотри на этот товар в Dolce Deals: ${product.name} от ${product.brand}`,
+            url: window.location.href
+        };
+
+        if (navigator.share) {
+            // Если поддерживается нативное API поделиться
+            navigator.share(shareData).catch(console.error);
+        } else if (navigator.clipboard) {
+            // Копируем ссылку в буфер обмена
+            const shareText = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+            navigator.clipboard.writeText(shareText).then(() => {
+                // Показать уведомление
+                this.showNotification('Ссылка скопирована в буфер обмена');
+            }).catch(console.error);
+        } else {
+            // Fallback для старых браузеров
+            const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
+            window.open(shareUrl, '_blank');
+        }
+    }
+
+    // НОВАЯ ФУНКЦИЯ: Показать уведомление
+    showNotification(message) {
+        // Создаем простое уведомление
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            z-index: 10000;
+            font-size: 0.9rem;
+            animation: fadeInOut 2s ease-in-out forwards;
+        `;
+
+        // Добавляем стили анимации
+        if (!document.getElementById('notificationStyles')) {
+            const style = document.createElement('style');
+            style.id = 'notificationStyles';
+            style.textContent = `
+                @keyframes fadeInOut {
+                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+                    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        document.body.appendChild(notification);
+
+        // Удаляем уведомление через 2 секунды
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 2000);
+    }
+
+    // Покупка товара (улучшенная версия)
     buyProduct(product) {
         const selectedSize = document.querySelector('.size-option.selected');
         
         if (!selectedSize) {
-            alert('Пожалуйста, выберите размер');
+            this.showNotification('Пожалуйста, выберите размер');
             return;
         }
         
-        const message = `Здравствуйте! Хочу купить:\n\n` +
-                       `🛍️ ${product.brand} - ${product.name}\n` +
-                       `💰 Цена: ${this.formatPrice(product.onSale ? product.salePrice : product.price)}\n` +
-                       `📏 Размер: ${selectedSize.textContent}\n` +
-                       `🆔 ID товара: ${product.id}`;
+        const price = product.onSale ? product.salePrice : product.price;
+        const message = `🛍️ *НОВЫЙ ЗАКАЗ*\n\n` +
+                       `📦 *Товар:* ${product.brand} - ${product.name}\n` +
+                       `💰 *Цена:* ${this.formatPrice(price)}\n` +
+                       `📏 *Размер:* ${selectedSize.textContent}\n` +
+                       `🆔 *Артикул:* ${product.brand.substring(0, 2).toUpperCase()}-${product.id.toString().padStart(6, '0')}\n` +
+                       `🔗 *Изображение:* ${product.image}\n\n` +
+                       `Пожалуйста, подтвердите заказ и сообщите детали доставки.`;
         
         const encodedMessage = encodeURIComponent(message);
         const telegramUrl = `https://t.me/dolcedeals_manager?text=${encodedMessage}`;
         
-        window.open(telegramUrl, '_blank');
+        // Анимация кнопки покупки
+        const buyBtn = document.getElementById('productDetailBuy');
+        buyBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            buyBtn.style.transform = '';
+            window.open(telegramUrl, '_blank');
+        }, 150);
     }
 
     // Закрытие модального окна товара

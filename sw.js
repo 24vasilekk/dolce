@@ -263,7 +263,7 @@ function createOfflinePage() {
         <title>Dolce Deals - Офлайн</title>
         <style>
             body {
-                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
