@@ -3,7 +3,7 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python3 dolce_api_server_railway.py",
+    "startCommand": "gunicorn --bind 0.0.0.0:$PORT dolce_api_server_railway:app",
     "healthcheckPath": "/api/health",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE",

@@ -201,10 +201,14 @@ def get_product(product_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# Для Railway/Gunicorn запуск через app объект
 if __name__ == '__main__':
     print(f"🚀 Запуск Dolce API Server на порту {PORT}")
     print(f"📊 Загружено товаров: {len(load_products())}")
     print(f"🌐 Health check: /api/health")
     print(f"🛍️ API товары: /api/products")
     
+    # Для локального тестирования
     app.run(host='0.0.0.0', port=PORT, debug=False)
+
+# Railway будет использовать app объект через Gunicorn

@@ -1,30 +1,16 @@
-# E-commerce Parser Dependencies
-# Основные зависимости для парсинга e-commerce сайтов
+# Railway Production Dependencies
+# Минимальные зависимости для API сервера на Railway
 
-# Веб-скрапинг
-selenium==4.15.0
-beautifulsoup4==4.12.2
+# Flask API
+Flask==3.0.0
+Flask-CORS==4.0.0
+gunicorn==21.2.0
+
+# HTTP клиент
 requests==2.31.0
 
-# Работа с данными
-pandas==2.1.3
-openpyxl==3.1.2
-
-# Асинхронная обработка
-aiohttp==3.9.1
-
-# Загрузка изображений в облако
-cloudinary==1.36.0
-
-# Прогресс-бар
-tqdm==4.66.1
-
-# GUI (уже включен в Python)
-# tkinter - встроен в Python
-
-# HTML парсинг
-lxml==4.9.3
-html5lib==1.1
+# JSON обработка (встроен в Python)
+# json - встроен в Python
 
 # Дополнительные утилиты
 urllib3==2.0.7
