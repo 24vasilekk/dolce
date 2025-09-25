@@ -5,6 +5,7 @@ class FashionApp {
         this.currentGender = null;
         this.currentCategory = null;
         this.currentSubcategory = null;
+        this.currentProduct = null;
         this.products = [];
         this.filteredProducts = [];
         this.favorites = new Set();
@@ -81,7 +82,7 @@ class FashionApp {
         });
 
         // Модальные окна
-        const closeButtons = document.querySelectorAll('#closeCategories, #closeSearch, #closeFilter');
+        const closeButtons = document.querySelectorAll('#closeCategories, #closeSearch, #closeFilter, #closeProductDetail');
         closeButtons.forEach(btn => {
             btn.addEventListener('click', () => this.closeAllModals());
         });
@@ -145,9 +146,26 @@ class FashionApp {
             document.getElementById('loadMore').addEventListener('click', () => this.loadMore());
         }
 
+        // Product Detail Modal
+        if (document.getElementById('productDetailFavorite')) {
+            document.getElementById('productDetailFavorite').addEventListener('click', () => {
+                if (this.currentProduct) {
+                    this.toggleFavorite(this.currentProduct.id);
+                }
+            });
+        }
+
+        if (document.getElementById('productDetailBuy')) {
+            document.getElementById('productDetailBuy').addEventListener('click', () => {
+                if (this.currentProduct) {
+                    this.buyProduct(this.currentProduct);
+                }
+            });
+        }
+
         // Закрытие модальных окон и выпадающих меню по клику вне
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('product-detail-modal')) {
                 this.closeAllModals();
             }
             
@@ -510,7 +528,181 @@ class FashionApp {
             this.toggleFavorite(product.id);
         });
 
+        // Обработчик клика по карточке
+        card.addEventListener('click', () => {
+            this.openProductDetail(product);
+        });
+
         return card;
+    }
+
+    // Открытие детального просмотра товара
+    openProductDetail(product) {
+        this.currentProduct = product;
+        
+        // Заполнение информации о товаре
+        document.getElementById('productDetailImage').src = product.image;
+        document.getElementById('productDetailImage').alt = product.name;
+        document.getElementById('productDetailBrand').textContent = product.brand;
+        document.getElementById('productDetailName').textContent = product.name;
+        document.getElementById('productDetailDescription').textContent = product.description;
+        
+        // Цена
+        const priceEl = document.getElementById('productDetailPrice');
+        const price = product.onSale ? product.salePrice : product.price;
+        const originalPrice = product.onSale ? product.price : null;
+        
+        priceEl.innerHTML = `
+            ${this.formatPrice(price)}
+            ${originalPrice ? `<span class="original-price">${this.formatPrice(originalPrice)}</span>` : ''}
+        `;
+        
+        // Размеры
+        const sizesContainer = document.getElementById('productDetailSizes');
+        sizesContainer.innerHTML = '';
+        
+        product.sizes.forEach(size => {
+            const sizeBtn = document.createElement('button');
+            sizeBtn.className = 'size-option';
+            sizeBtn.textContent = size;
+            sizeBtn.addEventListener('click', () => {
+                sizesContainer.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('selected'));
+                sizeBtn.classList.add('selected');
+            });
+            sizesContainer.appendChild(sizeBtn);
+        });
+        
+        // Кнопка избранного
+        const favoriteBtn = document.getElementById('productDetailFavorite');
+        const isLiked = this.favorites.has(product.id);
+        favoriteBtn.classList.toggle('liked', isLiked);
+        const favoriteSvg = favoriteBtn.querySelector('svg');
+        if (favoriteSvg) {
+            favoriteSvg.setAttribute('fill', isLiked ? 'currentColor' : 'none');
+        }
+        
+        // Показать похожие товары
+        this.renderSimilarProducts(product);
+        
+        // Показать модальное окно
+        document.getElementById('productDetailModal').classList.remove('hidden');
+    }
+
+    // Отображение похожих товаров
+    renderSimilarProducts(currentProduct) {
+        const container = document.getElementById('similarProductsGrid');
+        container.innerHTML = '';
+        
+        // Найти похожие товары
+        let similarProducts = this.findSimilarProducts(currentProduct);
+        
+        // Ограничить до 4 товаров
+        similarProducts = similarProducts.slice(0, 4);
+        
+        similarProducts.forEach(product => {
+            const similarCard = document.createElement('div');
+            similarCard.className = 'similar-product-card';
+            
+            const price = product.onSale ? product.salePrice : product.price;
+            
+            similarCard.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" class="similar-product-image" loading="lazy">
+                <div class="similar-product-info">
+                    <div class="similar-product-brand">${product.brand}</div>
+                    <div class="similar-product-name">${product.name}</div>
+                    <div class="similar-product-price">${this.formatPrice(price)}</div>
+                </div>
+            `;
+            
+            similarCard.addEventListener('click', () => {
+                this.openProductDetail(product);
+            });
+            
+            container.appendChild(similarCard);
+        });
+    }
+
+    // Поиск похожих товаров
+    findSimilarProducts(currentProduct) {
+        const allProducts = this.products.filter(p => p.id !== currentProduct.id);
+        
+        // Приоритет 1: Тот же бренд и схожее название
+        const sameBrandSimilarName = allProducts.filter(p => 
+            p.brand === currentProduct.brand && 
+            p.gender === currentProduct.gender &&
+            this.isSimilarName(p.name, currentProduct.name)
+        );
+        
+        if (sameBrandSimilarName.length >= 4) {
+            return sameBrandSimilarName;
+        }
+        
+        // Приоритет 2: Та же категория и подкатегория
+        const sameCategorySubcategory = allProducts.filter(p => 
+            p.category === currentProduct.category && 
+            p.subcategory === currentProduct.subcategory &&
+            p.gender === currentProduct.gender
+        );
+        
+        // Объединить результаты
+        const combined = [...sameBrandSimilarName, ...sameCategorySubcategory];
+        const unique = combined.filter((product, index, self) => 
+            index === self.findIndex(p => p.id === product.id)
+        );
+        
+        if (unique.length >= 4) {
+            return unique;
+        }
+        
+        // Приоритет 3: Та же категория
+        const sameCategory = allProducts.filter(p => 
+            p.category === currentProduct.category &&
+            p.gender === currentProduct.gender
+        );
+        
+        const finalCombined = [...unique, ...sameCategory];
+        return finalCombined.filter((product, index, self) => 
+            index === self.findIndex(p => p.id === product.id)
+        );
+    }
+
+    // Проверка схожести названий
+    isSimilarName(name1, name2) {
+        const words1 = name1.toLowerCase().split(' ');
+        const words2 = name2.toLowerCase().split(' ');
+        
+        // Проверить, есть ли общие слова
+        const commonWords = words1.filter(word => words2.includes(word));
+        
+        // Считать похожими, если есть минимум 2 общих слова или 1 слово длиннее 4 символов
+        return commonWords.length >= 2 || commonWords.some(word => word.length > 4);
+    }
+
+    // Покупка товара
+    buyProduct(product) {
+        const selectedSize = document.querySelector('.size-option.selected');
+        
+        if (!selectedSize) {
+            alert('Пожалуйста, выберите размер');
+            return;
+        }
+        
+        const message = `Здравствуйте! Хочу купить:\n\n` +
+                       `🛍️ ${product.brand} - ${product.name}\n` +
+                       `💰 Цена: ${this.formatPrice(product.onSale ? product.salePrice : product.price)}\n` +
+                       `📏 Размер: ${selectedSize.textContent}\n` +
+                       `🆔 ID товара: ${product.id}`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        const telegramUrl = `https://t.me/dolcedeals_manager?text=${encodedMessage}`;
+        
+        window.open(telegramUrl, '_blank');
+    }
+
+    // Закрытие модального окна товара
+    closeProductDetail() {
+        document.getElementById('productDetailModal').classList.add('hidden');
+        this.currentProduct = null;
     }
 
     // Форматирование цены
@@ -532,6 +724,17 @@ class FashionApp {
         
         this.saveFavorites();
         this.updateFavoriteButtons();
+        
+        // Обновить кнопку в модальном окне, если товар открыт
+        if (this.currentProduct && this.currentProduct.id === productId) {
+            const favoriteBtn = document.getElementById('productDetailFavorite');
+            const isLiked = this.favorites.has(productId);
+            favoriteBtn.classList.toggle('liked', isLiked);
+            const favoriteSvg = favoriteBtn.querySelector('svg');
+            if (favoriteSvg) {
+                favoriteSvg.setAttribute('fill', isLiked ? 'currentColor' : 'none');
+            }
+        }
         
         if (this.currentTab === 'favorites') {
             this.updateFavoritesTab();
@@ -627,11 +830,8 @@ class FashionApp {
             `;
             
             resultItem.addEventListener('click', () => {
-                const searchInput = document.getElementById('searchInput');
-                if (searchInput) {
-                    searchInput.value = product.name;
-                }
-                this.performSearch();
+                this.closeSearch();
+                this.openProductDetail(product);
             });
             
             resultsContainer.appendChild(resultItem);
@@ -946,6 +1146,7 @@ class FashionApp {
         this.closeCategories();
         this.closeSearch();
         this.closeFilter();
+        this.closeProductDetail();
     }
 
     closeCategories() {

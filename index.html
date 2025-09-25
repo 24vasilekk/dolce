@@ -123,6 +123,52 @@
             </div>
         </div>
 
+        <!-- Product Detail Modal -->
+        <div id="productDetailModal" class="product-detail-modal hidden">
+            <div class="product-detail-content">
+                <div class="product-detail-header">
+                    <h3>Детали товара</h3>
+                    <button id="closeProductDetail" class="product-detail-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="product-detail-body">
+                    <img id="productDetailImage" src="" alt="" class="product-detail-image">
+                    <div class="product-detail-info">
+                        <div id="productDetailBrand" class="product-detail-brand"></div>
+                        <h2 id="productDetailName" class="product-detail-name"></h2>
+                        <div id="productDetailPrice" class="product-detail-price"></div>
+                        <p id="productDetailDescription" class="product-detail-description"></p>
+                        
+                        <div class="product-detail-sizes">
+                            <h4>Доступные размеры</h4>
+                            <div id="productDetailSizes" class="size-options"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-detail-actions">
+                    <button id="productDetailFavorite" class="favorite-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                    <button id="productDetailBuy" class="buy-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12C24 5.373 18.627 0 12 0S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM12.43 8.859c-1.167.485-3.5 1.49-6.998 3.014-1.297.568-1.969.893-2.017 1.391-.054.573.605.765 1.536 1.096.282.1.582.21.892.33 1.189.4 2.734.847 3.587.847.741 0 1.574-.36 2.498-1.078.866-.672 1.742-1.349 2.632-2.031.378-.291.669-.496.935-.618.318-.146.571-.22.716-.22.288 0 .53.14.726.42.196.28.293.621.293 1.022v3.401c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382-.382 0-.714-.095-.996-.285a1.847 1.847 0 0 1-.627-.695c-.159-.294-.314-.631-.464-1.01-.102-.259-.193-.496-.273-.711-.08-.215-.14-.379-.18-.491-.04-.112-.07-.186-.092-.222-.021-.036-.035-.054-.041-.054-.006 0-.01.018-.013.054s-.005.09-.005.158v1.707c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382s-.778-.127-1.054-.382c-.276-.255-.414-.598-.414-1.029v-3.874c0-.403.097-.744.293-1.022.196-.28.438-.42.726-.42.145 0 .398.074.716.22.266.122.557.327.935.618.89.682 1.766 1.359 2.632 2.031.924.718 1.757 1.078 2.498 1.078.853 0 2.398-.447 3.587-.847.31-.12.61-.23.892-.33.931-.331 1.59-.523 1.536-1.096-.048-.498-.72-.823-2.017-1.391-3.498-1.524-5.831-2.529-6.998-3.014-.49-.204-.9-.307-1.228-.307s-.738.103-1.228.307z"/>
+                        </svg>
+                        Купить в Telegram
+                    </button>
+                </div>
+                <div class="similar-products">
+                    <h4>Похожие товары</h4>
+                    <div id="similarProductsGrid" class="similar-products-grid"></div>
+                </div>
+            </div>
+        </div>
+
         <!-- Main Content -->
         <main class="main-content">
             <!-- Home Tab -->
