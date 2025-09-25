@@ -128,36 +128,43 @@ def load_products():
         return []
 
 @app.route('/')
+@app.route('/dolce/')
 def home():
-    """Главная страница - редирект на приложение"""
-    return """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Dolce Deals</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    </head>
-    <body style="margin:0;padding:20px;font-family:Arial,sans-serif;background:#f5f5f5;">
-        <div style="text-align:center;max-width:400px;margin:50px auto;">
-            <h1>🛍️ Dolce Deals</h1>
-            <p>Fashion приложение с товарами от премиальных брендов</p>
-            <a href="/dolce/" style="background:#4a90e2;color:white;padding:15px 30px;border-radius:10px;text-decoration:none;display:inline-block;">
-                Открыть приложение
-            </a>
-        </div>
-        <script>
-            // Telegram WebApp автоматический запуск
-            if (window.Telegram && window.Telegram.WebApp) {
-                setTimeout(() => {
-                    window.location.href = '/dolce/';
-                }, 1000);
-            }
-        </script>
-    </body>
-    </html>
-    """
+    """Главная страница - Dolce приложение"""
+    try:
+        with open('index.html', 'r', encoding='utf-8') as f:
+            html_content = f.read()
+            
+        # Обновляем пути для Railway
+        html_content = html_content.replace('src="app_with_api.js"', 'src="/app_with_api.js"')
+        html_content = html_content.replace('src="app.js"', 'src="/app.js"') 
+        html_content = html_content.replace('src="data/categories.js"', 'src="/data/categories.js"')
+        html_content = html_content.replace('href="style.css"', 'href="/style.css"')
+        html_content = html_content.replace('href="manifest.json"', 'href="/manifest.json"')
+        
+        return html_content
+    except Exception as e:
+        print(f"❌ Ошибка загрузки index.html: {e}")
+        return f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Dolce Deals</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        </head>
+        <body style="margin:0;padding:20px;font-family:Arial,sans-serif;background:#f5f5f5;">
+            <div style="text-align:center;max-width:400px;margin:50px auto;">
+                <h1>🛍️ Dolce Deals</h1>
+                <p>Fashion приложение с товарами от премиальных брендов</p>
+                <p>📊 API работает: <a href="/api/health">Health Check</a></p>
+                <p>🛍️ Товары: <a href="/api/products">Посмотреть товары</a></p>
+                <p>Ошибка: {e}</p>
+            </div>
+        </body>
+        </html>
+        """
 
 @app.route('/api/health')
 def health_check():

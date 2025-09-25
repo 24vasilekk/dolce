@@ -2,7 +2,10 @@
 class FashionAppWithAPI extends FashionApp {
     constructor() {
         super();
-        this.apiBaseUrl = 'http://localhost:5001/api';
+        // Определяем базовый URL API в зависимости от окружения
+        this.apiBaseUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:5001/api'
+            : `${window.location.protocol}//${window.location.host}/api`;
         this.fallbackToLocalData = true;
         this.lastSyncTime = null;
     }
