@@ -37,31 +37,45 @@ class DataConverter:
         dolce_products = []
         
         for i, product in enumerate(bestsecret_products):
-            # Парсим цену
-            current_price_str = str(product.get('current_price', '0')).replace('€', '').replace(',', '.').strip()
-            original_price_str = str(product.get('original_price', '0')).replace('€', '').replace(',', '.').strip()
+            # Парсим цену - учитываем что может быть float или string
+            current_price = product.get('current_price', 0)
+            original_price = product.get('original_price', 0)
             
-            try:
-                current_price = int(float(current_price_str) * 100)  # Конвертируем EUR в RUB (1:100)
-            except:
-                current_price = 0
+            # Если цена строка, парсим её
+            if isinstance(current_price, str):
+                current_price = float(current_price.replace('€', '').replace(',', '.').strip())
+            if isinstance(original_price, str):
+                original_price = float(original_price.replace('€', '').replace(',', '.').strip())
             
-            try:
-                original_price = int(float(original_price_str) * 100)
-            except:
-                original_price = current_price
+            # Конвертируем EUR в RUB (1:100)
+            current_price_rub = int(current_price * 100)
+            original_price_rub = int(original_price * 100) if original_price else current_price_rub
+            
+            # Получаем скидку
+            discount = product.get('discount_percentage', 0)
+            if isinstance(discount, (int, float)):
+                discount_str = f"{int(discount)}%"
+            else:
+                discount_str = str(discount)
+            
+            # Получаем изображение
+            image_url = ""
+            if product.get('image_urls') and isinstance(product['image_urls'], list):
+                image_url = product['image_urls'][0] if product['image_urls'] else ""
+            else:
+                image_url = product.get('image_url', '')
             
             dolce_product = {
-                "id": product.get('id', f"product_{i + 1}"),
+                "id": product.get('sku', f"product_{i + 1}"),
                 "name": product.get('name', 'Unknown Product'),
                 "brand": self.brand_mapping.get(product.get('brand', 'Unknown'), product.get('brand', 'Unknown')),
-                "price": current_price,
-                "originalPrice": original_price,
-                "discount": product.get('discount_percentage', '0%'),
-                "category": self.category_mapping.get(product.get('category', 'clothing').lower(), 'Одежда'),
+                "price": current_price_rub,
+                "originalPrice": original_price_rub,
+                "discount": discount_str,
+                "category": self.category_mapping.get(product.get('category', 'clothing'), 'Одежда'),
                 "color": product.get('color', 'Разноцветный'),
                 "sizes": product.get('available_sizes', []),
-                "image": product.get('image_url', ''),
+                "image": image_url,
                 "description": f"{product.get('brand', 'Brand')} {product.get('name', 'Product')}",
                 "inStock": len(product.get('available_sizes', [])) > 0
             }
@@ -79,27 +93,34 @@ def load_products():
         if os.path.exists('products_database.json'):
             with open('products_database.json', 'r', encoding='utf-8') as f:
                 bestsecret_data = json.load(f)
+                
+            # Проверяем формат данных
+            if isinstance(bestsecret_data, list):
+                # Это прямой массив товаров от парсера
+                products = bestsecret_data
+            else:
+                # Это объект с полем products
+                products = bestsecret_data.get('products', [])
+                
         else:
             print("Warning: products_database.json не найден, используем демо данные")
-            bestsecret_data = {
-                "products": [
-                    {
-                        "id": "demo_1",
-                        "name": "Demo Fashion Item",
-                        "brand": "Demo Brand",
-                        "current_price": "99.99€",
-                        "original_price": "199.99€",
-                        "discount_percentage": "50%",
-                        "category": "clothing",
-                        "color": "Black",
-                        "available_sizes": ["M", "L", "XL"],
-                        "image_url": "https://via.placeholder.com/400x400",
-                    }
-                ]
-            }
+            products = [
+                {
+                    "sku": "demo_1",
+                    "name": "Demo Fashion Item",
+                    "brand": "Demo Brand",
+                    "current_price": 99.99,
+                    "original_price": 199.99,
+                    "discount_percentage": "50%",
+                    "category": "clothing",
+                    "color": "Black",
+                    "available_sizes": ["M", "L", "XL"],
+                    "image_urls": ["https://via.placeholder.com/400x400"],
+                }
+            ]
         
         # Конвертируем в формат Dolce
-        dolce_products = converter.convert_bestsecret_to_dolce(bestsecret_data.get('products', []))
+        dolce_products = converter.convert_bestsecret_to_dolce(products)
         
         return dolce_products
     except Exception as e:
