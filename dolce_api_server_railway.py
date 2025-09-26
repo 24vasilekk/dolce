@@ -130,37 +130,52 @@ def load_products():
 @app.route('/')
 @app.route('/dolce/')
 def home():
-    """Главная страница - Dolce приложение"""
+    """Главная страница - Dolce приложение со встроенными стилями"""
     try:
-        with open('index.html', 'r', encoding='utf-8') as f:
-            html_content = f.read()
-            
-        # Обновляем пути для Railway
-        html_content = html_content.replace('src="app_with_api.js"', 'src="/app_with_api.js"')
-        html_content = html_content.replace('src="app.js"', 'src="/app.js"') 
-        html_content = html_content.replace('src="data/categories.js"', 'src="/data/categories.js"')
-        html_content = html_content.replace('href="style.css"', 'href="/style.css"')
-        html_content = html_content.replace('href="manifest.json"', 'href="/manifest.json"')
-        
-        return html_content
+        # Используем встроенную версию приложения
+        with open('embedded_app.html', 'r', encoding='utf-8') as f:
+            return f.read()
     except Exception as e:
-        print(f"❌ Ошибка загрузки index.html: {e}")
-        return f"""
+        print(f"❌ Ошибка загрузки embedded_app.html: {e}")
+        # Fallback версия
+        return """
         <!DOCTYPE html>
-        <html>
+        <html lang="ru">
         <head>
-            <title>Dolce Deals</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Dolce Deals</title>
             <script src="https://telegram.org/js/telegram-web-app.js"></script>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+                .container { max-width: 400px; margin: 50px auto; text-align: center; background: white; padding: 30px; border-radius: 12px; }
+                .btn { display: inline-block; padding: 15px 30px; background: #4a90e2; color: white; text-decoration: none; border-radius: 8px; margin: 10px; }
+            </style>
         </head>
-        <body style="margin:0;padding:20px;font-family:Arial,sans-serif;background:#f5f5f5;">
-            <div style="text-align:center;max-width:400px;margin:50px auto;">
+        <body>
+            <div class="container">
                 <h1>🛍️ Dolce Deals</h1>
                 <p>Fashion приложение с товарами от премиальных брендов</p>
-                <p>📊 API работает: <a href="/api/health">Health Check</a></p>
-                <p>🛍️ Товары: <a href="/api/products">Посмотреть товары</a></p>
-                <p>Ошибка: {e}</p>
+                <a href="/api/health" class="btn">📊 Health Check</a>
+                <a href="/api/products" class="btn">🛍️ Посмотреть товары</a>
+                <div id="products"></div>
+                <script>
+                    fetch('/api/products')
+                        .then(r => r.json())
+                        .then(products => {
+                            document.getElementById('products').innerHTML = 
+                                '<h3>Загружено товаров: ' + products.length + '</h3>' +
+                                products.map(p => 
+                                    '<div style="border:1px solid #ddd;margin:10px;padding:10px;">' +
+                                    '<strong>' + p.brand + ' ' + p.name + '</strong><br>' +
+                                    'Цена: ' + p.price + '₽' +
+                                    '</div>'
+                                ).join('');
+                        })
+                        .catch(e => {
+                            document.getElementById('products').innerHTML = '❌ Ошибка: ' + e.message;
+                        });
+                </script>
             </div>
         </body>
         </html>
