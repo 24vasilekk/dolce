@@ -239,4 +239,45 @@ if __name__ == '__main__':
     # Для локального тестирования
     app.run(host='0.0.0.0', port=PORT, debug=False)
 
+# Статические файлы для Railway
+@app.route('/style.css')
+def serve_css():
+    """CSS файл"""
+    return send_from_directory('.', 'style.css', mimetype='text/css')
+
+@app.route('/app.js')
+def serve_app_js():
+    """Основной JS файл"""
+    return send_from_directory('.', 'app.js', mimetype='application/javascript')
+
+@app.route('/app_with_api.js') 
+def serve_api_js():
+    """API JS файл"""
+    return send_from_directory('.', 'app_with_api.js', mimetype='application/javascript')
+
+@app.route('/data/categories.js')
+def serve_categories():
+    """Категории JS"""
+    return send_from_directory('./data', 'categories.js', mimetype='application/javascript')
+
+@app.route('/manifest.json')
+def serve_manifest():
+    """PWA манифест"""
+    return send_from_directory('.', 'manifest.json', mimetype='application/json')
+
+@app.route('/assets/<path:filename>')
+def serve_assets(filename):
+    """Assets файлы (изображения, иконки)"""
+    return send_from_directory('./assets', filename)
+
+@app.route('/sw.js')
+def serve_sw():
+    """Service Worker"""
+    return send_from_directory('.', 'sw.js', mimetype='application/javascript')
+
+@app.route('/data/<path:filename>')
+def serve_data(filename):
+    """Data файлы"""
+    return send_from_directory('./data', filename)
+
 # Railway будет использовать app объект через Gunicorn
