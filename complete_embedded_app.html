@@ -929,6 +929,411 @@
             font-size: 1rem;
         }
 
+        /* Product Detail Modal */
+        .product-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .product-detail-modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-detail-content {
+            background: white;
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 100vh;
+            border-radius: 0;
+            overflow-y: auto;
+            animation: slideUpModal 0.4s ease-out;
+            position: relative;
+        }
+
+        @keyframes slideUpModal {
+            from {
+                opacity: 0;
+                transform: translateY(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-detail-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            padding: 20px 24px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .product-detail-close {
+            width: 48px;
+            height: 48px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-detail-close:hover {
+            background: #e9ecef;
+            color: #1a1a1a;
+            transform: scale(1.05);
+        }
+
+        .product-detail-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+            min-height: calc(100vh - 80px);
+        }
+
+        .product-detail-image-section {
+            position: relative;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            padding: 40px;
+        }
+
+        .product-detail-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-favorite-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-favorite-btn.liked {
+            background: #ef4444;
+            color: white;
+        }
+
+        .product-detail-info-section {
+            padding: 40px;
+        }
+
+        .product-detail-brand {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .product-detail-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .product-detail-price-container {
+            margin-bottom: 32px;
+        }
+
+        .product-detail-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .product-detail-original-price {
+            font-size: 1.8rem;
+            color: #999;
+            text-decoration: line-through;
+            font-weight: 600;
+        }
+
+        .product-detail-sale-badge {
+            background: #ef4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .product-detail-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 32px;
+        }
+
+        .product-detail-sizes {
+            margin-bottom: 32px;
+        }
+
+        .product-detail-sizes h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+
+        .size-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .size-option {
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .size-option:hover {
+            border-color: #666;
+        }
+
+        .size-option.selected {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .product-detail-specs {
+            margin-bottom: 40px;
+        }
+
+        .product-detail-specs h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .specs-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .spec-value {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 8px;
+        }
+
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0;
+            cursor: pointer;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .buy-btn {
+            flex: 1;
+            padding: 18px 32px;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(135deg, #333333 0%, #555555 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-btn {
+            width: 60px;
+            height: 60px;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            background: #e9ecef;
+            border-color: #ccc;
+            transform: scale(1.05);
+        }
+
+        .similar-products {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .similar-products h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+        }
+
+        .similar-products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .similar-product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .similar-product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .similar-product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .similar-product-info {
+            padding: 16px;
+        }
+
+        .similar-product-brand {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .similar-product-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .similar-product-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
         /* Notification */
         .notification {
             position: fixed;
@@ -1060,6 +1465,77 @@
                     <button id="searchBtn" class="search-btn">Найти товары</button>
                 </div>
                 <div id="searchResults" class="search-results"></div>
+            </div>
+        </div>
+
+        <!-- Product Detail Modal -->
+        <div id="productDetailModal" class="product-detail-modal hidden">
+            <div class="product-detail-content">
+                <div class="product-detail-header">
+                    <h3>Детали товара</h3>
+                    <button id="closeProductDetail" class="product-detail-close">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="product-detail-body">
+                    <div class="product-detail-image-section">
+                        <img id="productDetailImage" 
+                             src="" 
+                             alt="" 
+                             class="product-detail-image">
+                        <button id="productDetailFavorite" class="product-favorite-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="product-detail-info-section">
+                        <div id="productDetailBrand" class="product-detail-brand"></div>
+                        <h2 id="productDetailName" class="product-detail-name"></h2>
+                        
+                        <div class="product-detail-price-container">
+                            <div id="productDetailPrice" class="product-detail-price"></div>
+                        </div>
+
+                        <div id="productDetailDescription" class="product-detail-description"></div>
+
+                        <div class="product-detail-sizes">
+                            <h4>Выберите размер</h4>
+                            <div id="productDetailSizes" class="size-options"></div>
+                        </div>
+
+                        <div class="product-detail-specs">
+                            <h4>Характеристики</h4>
+                            <div id="productDetailSpecs" class="specs-grid"></div>
+                        </div>
+
+                        <div class="product-detail-actions">
+                            <button id="productDetailBuy" class="buy-btn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 12C24 5.373 18.627 0 12 0S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zM12.43 8.859c-1.167.485-3.5 1.49-6.998 3.014-1.297.568-1.969.893-2.017 1.391-.054.573.605.765 1.536 1.096.282.1.582.21.892.33 1.189.4 2.734.847 3.587.847.741 0 1.574-.36 2.498-1.078.866-.672 1.742-1.349 2.632-2.031.378-.291.669-.496.935-.618.318-.146.571-.22.716-.22.288 0 .53.14.726.42.196.28.293.621.293 1.022v3.401c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382-.382 0-.714-.095-.996-.285a1.847 1.847 0 0 1-.627-.695c-.159-.294-.314-.631-.464-1.01-.102-.259-.193-.496-.273-.711-.08-.215-.14-.379-.18-.491-.04-.112-.07-.186-.092-.222-.021-.036-.035-.054-.041-.054-.006 0-.01.018-.013.054s-.005.09-.005.158v1.707c0 .431-.138.774-.414 1.029-.276.255-.627.382-1.054.382s-.778-.127-1.054-.382c-.276-.255-.414-.598-.414-1.029v-3.874c0-.403.097-.744.293-1.022.196-.28.438-.42.726-.42.145 0 .398.074.716.22.266.122.557.327.935.618.89.682 1.766 1.359 2.632 2.031.924.718 1.757 1.078 2.498 1.078.853 0 2.398-.447 3.587-.847.31-.12.61-.23.892-.33.931-.331 1.59-.523 1.536-1.096-.048-.498-.72-.823-2.017-1.391-3.498-1.524-5.831-2.529-6.998-3.014-.49-.204-.9-.307-1.228-.307s-.738.103-1.228.307z"/>
+                                </svg>
+                                Заказать в Telegram
+                            </button>
+                            <button id="productDetailShare" class="share-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                                    <polyline points="16,6 12,2 8,6"></polyline>
+                                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="similar-products">
+                    <h4>Рекомендуемые товары</h4>
+                    <div id="similarProductsGrid" class="similar-products-grid"></div>
+                </div>
             </div>
         </div>
 
@@ -1482,10 +1958,35 @@
                 });
 
                 // Модальные окна
-                const closeButtons = document.querySelectorAll('#closeCategories, #closeSearch, #closeFilter');
+                const closeButtons = document.querySelectorAll('#closeCategories, #closeSearch, #closeFilter, #closeProductDetail');
                 closeButtons.forEach(btn => {
                     btn.addEventListener('click', () => this.closeAllModals());
                 });
+
+                // Product Detail Modal обработчики
+                if (document.getElementById('productDetailFavorite')) {
+                    document.getElementById('productDetailFavorite').addEventListener('click', () => {
+                        if (this.currentProduct) {
+                            this.toggleFavorite(this.currentProduct.id);
+                        }
+                    });
+                }
+
+                if (document.getElementById('productDetailBuy')) {
+                    document.getElementById('productDetailBuy').addEventListener('click', () => {
+                        if (this.currentProduct) {
+                            this.buyProduct(this.currentProduct);
+                        }
+                    });
+                }
+
+                if (document.getElementById('productDetailShare')) {
+                    document.getElementById('productDetailShare').addEventListener('click', () => {
+                        if (this.currentProduct) {
+                            this.shareProduct(this.currentProduct);
+                        }
+                    });
+                }
 
                 // Поиск
                 const searchBtns = document.querySelectorAll('.header-search-btn, #headerSearchBtn, #productsSearchBtn, #favoritesSearchBtn');
@@ -1544,7 +2045,7 @@
                 }
 
                 // Клик вне модального окна
-                document.querySelectorAll('.modal').forEach(modal => {
+                document.querySelectorAll('.modal, .product-detail-modal').forEach(modal => {
                     modal.addEventListener('click', (e) => {
                         if (e.target === modal) this.closeAllModals();
                     });
@@ -1851,21 +2352,220 @@
             openProductDetail(product) {
                 this.currentProduct = product;
                 
-                const message = `🛍️ *${product.brand}*\n\n` +
-                               `📦 *${product.name}*\n` +
-                               `💰 *Цена:* ${this.formatPrice(product.price)}\n` +
-                               `📏 *Размеры:* ${product.sizes.join(', ') || 'Уточняйте'}\n\n` +
-                               `${product.description}\n\n` +
-                               `Для заказа обратитесь в поддержку!`;
+                // Заполнение информации о товаре
+                document.getElementById('productDetailImage').src = product.image;
+                document.getElementById('productDetailImage').alt = product.name;
+                document.getElementById('productDetailBrand').textContent = product.brand;
+                document.getElementById('productDetailName').textContent = product.name;
+                document.getElementById('productDetailDescription').textContent = product.description || `${product.brand} ${product.name} - премиальное качество от ведущего мирового бренда`;
                 
-                this.showNotification('Информация о товаре');
+                // Цена с улучшенным форматированием
+                const priceEl = document.getElementById('productDetailPrice');
+                const price = product.onSale ? product.salePrice : product.price;
+                const originalPrice = product.onSale ? product.originalPrice : null;
                 
-                // Можно также открыть Telegram с сообщением
-                setTimeout(() => {
-                    const encodedMessage = encodeURIComponent(message);
-                    const telegramUrl = `https://t.me/dolcedeals_support?text=${encodedMessage}`;
-                    window.open(telegramUrl, '_blank');
-                }, 1000);
+                let priceHtml = this.formatPrice(price);
+                
+                if (originalPrice && originalPrice !== price) {
+                    const discount = Math.round(((originalPrice - price) / originalPrice) * 100);
+                    priceHtml += `<span class="product-detail-original-price">${this.formatPrice(originalPrice)}</span>`;
+                    priceHtml += `<span class="product-detail-sale-badge">-${discount}%</span>`;
+                }
+                
+                priceEl.innerHTML = priceHtml;
+                
+                // Размеры
+                this.renderProductSizes(product);
+                
+                // Характеристики товара
+                this.renderProductSpecs(product);
+                
+                // Кнопка избранного
+                const favoriteBtn = document.getElementById('productDetailFavorite');
+                const isLiked = this.favorites.has(product.id);
+                favoriteBtn.classList.toggle('liked', isLiked);
+                const favoriteSvg = favoriteBtn.querySelector('svg');
+                if (favoriteSvg) {
+                    favoriteSvg.setAttribute('fill', isLiked ? 'currentColor' : 'none');
+                }
+                
+                // Показать похожие товары
+                this.renderSimilarProducts(product);
+                
+                // Показать модальное окно
+                document.getElementById('productDetailModal').classList.remove('hidden');
+            }
+
+            renderProductSizes(product) {
+                const sizesContainer = document.getElementById('productDetailSizes');
+                sizesContainer.innerHTML = '';
+                
+                if (product.sizes && product.sizes.length > 0) {
+                    product.sizes.forEach(size => {
+                        const sizeBtn = document.createElement('button');
+                        sizeBtn.className = 'size-option';
+                        sizeBtn.textContent = size;
+                        sizeBtn.addEventListener('click', () => {
+                            sizesContainer.querySelectorAll('.size-option').forEach(btn => btn.classList.remove('selected'));
+                            sizeBtn.classList.add('selected');
+                        });
+                        sizesContainer.appendChild(sizeBtn);
+                    });
+                } else {
+                    sizesContainer.innerHTML = '<p style="color: #666;">Размеры уточняйте при заказе</p>';
+                }
+            }
+
+            renderProductSpecs(product) {
+                const specsContainer = document.getElementById('productDetailSpecs');
+                specsContainer.innerHTML = '';
+
+                // Артикул
+                const articleSpec = this.createSpecItem('Артикул', `${product.brand.substring(0, 2).toUpperCase()}-${product.id.toString().padStart(6, '0')}`);
+                specsContainer.appendChild(articleSpec);
+
+                // Бренд
+                const brandSpec = this.createSpecItem('Бренд', product.brand);
+                specsContainer.appendChild(brandSpec);
+
+                // Категория
+                if (product.subcategory && product.subcategory !== 'Все позиции') {
+                    const categorySpec = this.createSpecItem('Категория', product.subcategory);
+                    specsContainer.appendChild(categorySpec);
+                }
+
+                // Материалы
+                if (product.materials && product.materials.length > 0) {
+                    const materialSpec = this.createSpecItem('Материал', product.materials.join(', '));
+                    specsContainer.appendChild(materialSpec);
+                }
+
+                // Цвета
+                if (product.colors && product.colors.length > 0) {
+                    const colorSpec = document.createElement('div');
+                    colorSpec.className = 'spec-item';
+                    colorSpec.innerHTML = `
+                        <span class="spec-label">Доступные цвета</span>
+                        <div class="spec-value">
+                            <div class="color-swatches">
+                                ${product.colors.map(color => {
+                                    const colorHex = this.getColorHex(color);
+                                    return `<div class="color-swatch" style="background: ${colorHex};" title="${color}"></div>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                    `;
+                    specsContainer.appendChild(colorSpec);
+                }
+            }
+
+            createSpecItem(label, value) {
+                const specItem = document.createElement('div');
+                specItem.className = 'spec-item';
+                specItem.innerHTML = `
+                    <span class="spec-label">${label}</span>
+                    <span class="spec-value">${value}</span>
+                `;
+                return specItem;
+            }
+
+            getColorHex(colorName) {
+                const colorMap = {
+                    'black': '#000000',
+                    'white': '#ffffff',
+                    'red': '#dc2626',
+                    'blue': '#2563eb',
+                    'green': '#059669',
+                    'yellow': '#d97706',
+                    'pink': '#ec4899',
+                    'purple': '#7c3aed',
+                    'brown': '#92400e',
+                    'grey': '#6b7280',
+                    'gray': '#6b7280',
+                    'orange': '#ea580c',
+                    'beige': '#d2b48c',
+                    'gold': '#ffd700',
+                    'silver': '#c0c0c0'
+                };
+                return colorMap[colorName.toLowerCase()] || '#cccccc';
+            }
+
+            renderSimilarProducts(currentProduct) {
+                const container = document.getElementById('similarProductsGrid');
+                container.innerHTML = '';
+                
+                // Найти похожие товары
+                let similarProducts = this.findSimilarProducts(currentProduct);
+                
+                // Ограничить до 4 товаров
+                similarProducts = similarProducts.slice(0, 4);
+                
+                if (similarProducts.length === 0) {
+                    container.innerHTML = '<p style="color: #666; text-align: center; grid-column: 1 / -1;">Похожие товары не найдены</p>';
+                    return;
+                }
+                
+                similarProducts.forEach(product => {
+                    const similarCard = document.createElement('div');
+                    similarCard.className = 'similar-product-card';
+                    
+                    const price = product.onSale ? product.salePrice : product.price;
+                    
+                    similarCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}" class="similar-product-image" loading="lazy">
+                        <div class="similar-product-info">
+                            <div class="similar-product-brand">${product.brand}</div>
+                            <div class="similar-product-name">${product.name}</div>
+                            <div class="similar-product-price">${this.formatPrice(price)}</div>
+                        </div>
+                    `;
+                    
+                    similarCard.addEventListener('click', () => {
+                        this.openProductDetail(product);
+                    });
+                    
+                    container.appendChild(similarCard);
+                });
+            }
+
+            findSimilarProducts(currentProduct) {
+                const allProducts = this.products.filter(p => p.id !== currentProduct.id);
+                
+                // Приоритет 1: Тот же бренд
+                const sameBrand = allProducts.filter(p => 
+                    p.brand === currentProduct.brand &&
+                    p.gender === currentProduct.gender
+                );
+                
+                if (sameBrand.length >= 4) {
+                    return sameBrand;
+                }
+                
+                // Приоритет 2: Та же категория
+                const sameCategory = allProducts.filter(p => 
+                    p.category === currentProduct.category &&
+                    p.gender === currentProduct.gender
+                );
+                
+                // Объединить результаты
+                const combined = [...sameBrand, ...sameCategory];
+                const unique = combined.filter((product, index, self) => 
+                    index === self.findIndex(p => p.id === product.id)
+                );
+                
+                if (unique.length >= 4) {
+                    return unique;
+                }
+                
+                // Приоритет 3: Тот же пол
+                const sameGender = allProducts.filter(p => 
+                    p.gender === currentProduct.gender
+                );
+                
+                const finalCombined = [...unique, ...sameGender];
+                return finalCombined.filter((product, index, self) => 
+                    index === self.findIndex(p => p.id === product.id)
+                );
             }
 
             openSearch() {
@@ -2053,6 +2753,19 @@
                 this.saveFavorites();
                 this.updateFavoriteButtons();
                 
+                // Обновить кнопку в модальном окне, если товар открыт
+                if (this.currentProduct && this.currentProduct.id === productId) {
+                    const favoriteBtn = document.getElementById('productDetailFavorite');
+                    if (favoriteBtn) {
+                        const isLiked = this.favorites.has(productId);
+                        favoriteBtn.classList.toggle('liked', isLiked);
+                        const favoriteSvg = favoriteBtn.querySelector('svg');
+                        if (favoriteSvg) {
+                            favoriteSvg.setAttribute('fill', isLiked ? 'currentColor' : 'none');
+                        }
+                    }
+                }
+                
                 if (this.currentTab === 'favorites') {
                     this.updateFavoritesTab();
                 }
@@ -2103,10 +2816,71 @@
                 document.getElementById(modalId).classList.remove('hidden');
             }
 
+            buyProduct(product) {
+                const selectedSize = document.querySelector('.size-option.selected');
+                
+                if (!selectedSize && product.sizes && product.sizes.length > 0) {
+                    this.showNotification('Пожалуйста, выберите размер');
+                    return;
+                }
+                
+                const price = product.onSale ? product.salePrice : product.price;
+                const size = selectedSize ? selectedSize.textContent : 'Уточняйте';
+                const message = `🛍️ *НОВЫЙ ЗАКАЗ*\n\n` +
+                               `📦 *Товар:* ${product.brand} - ${product.name}\n` +
+                               `💰 *Цена:* ${this.formatPrice(price)}\n` +
+                               `📏 *Размер:* ${size}\n` +
+                               `🆔 *Артикул:* ${product.brand.substring(0, 2).toUpperCase()}-${product.id.toString().padStart(6, '0')}\n` +
+                               `🔗 *Изображение:* ${product.image}\n\n` +
+                               `Пожалуйста, подтвердите заказ и сообщите детали доставки.`;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const telegramUrl = `https://t.me/dolcedeals_support?text=${encodedMessage}`;
+                
+                // Анимация кнопки покупки
+                const buyBtn = document.getElementById('productDetailBuy');
+                if (buyBtn) {
+                    buyBtn.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        buyBtn.style.transform = '';
+                        if (window.Telegram && window.Telegram.WebApp) {
+                            window.Telegram.WebApp.openLink(telegramUrl);
+                        } else {
+                            window.open(telegramUrl, '_blank');
+                        }
+                    }, 150);
+                }
+            }
+
+            shareProduct(product) {
+                const shareData = {
+                    title: `${product.brand} - ${product.name}`,
+                    text: `Посмотри на этот товар в Dolce Deals: ${product.name} от ${product.brand}`,
+                    url: window.location.href
+                };
+
+                if (navigator.share) {
+                    // Если поддерживается нативное API поделиться
+                    navigator.share(shareData).catch(console.error);
+                } else if (navigator.clipboard) {
+                    // Копируем ссылку в буфер обмена
+                    const shareText = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        // Показать уведомление
+                        this.showNotification('Ссылка скопирована в буфер обмена');
+                    }).catch(console.error);
+                } else {
+                    // Fallback для старых браузеров
+                    const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
+                    window.open(shareUrl, '_blank');
+                }
+            }
+
             closeAllModals() {
-                document.querySelectorAll('.modal').forEach(modal => {
+                document.querySelectorAll('.modal, .product-detail-modal').forEach(modal => {
                     modal.classList.add('hidden');
                 });
+                this.currentProduct = null;
             }
 
             contactSupport() {
