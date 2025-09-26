@@ -133,10 +133,10 @@ def home():
     """Главная страница - Dolce приложение со встроенными стилями"""
     try:
         # Используем встроенную версию приложения
-        with open('embedded_app.html', 'r', encoding='utf-8') as f:
+        with open('full_embedded_app.html', 'r', encoding='utf-8') as f:
             return f.read()
     except Exception as e:
-        print(f"❌ Ошибка загрузки embedded_app.html: {e}")
+        print(f"❌ Ошибка загрузки full_embedded_app.html: {e}")
         # Fallback версия
         return """
         <!DOCTYPE html>
