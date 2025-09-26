@@ -16,18 +16,27 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
             font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #fff;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .app-container {
-            max-width: 100%;
-            margin: 0 auto;
+            max-width: 100vw;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
             padding-bottom: 80px;
+            min-height: 100vh;
         }
 
         /* Header */
@@ -86,7 +95,8 @@
         /* Content */
         .content {
             padding: 20px;
-            min-height: 60vh;
+            min-height: calc(100vh - 200px);
+            background: #f8f9fa;
         }
 
         .section {
@@ -298,13 +308,50 @@
 
             <!-- Account Section -->
             <section id="account" class="section">
-                <h2>Аккаунт</h2>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3>📊 API Статус</h3>
-                    <p id="apiStatus">Проверка...</p>
-                    <button onclick="syncProducts()" style="margin-top: 10px; padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                        🔄 Обновить товары
-                    </button>
+                <div style="padding: 20px;">
+                    <h2 style="margin-bottom: 30px; text-align: center;">👤 Мой аккаунт</h2>
+                    
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 20px;">
+                        <div style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+                            <h3 style="margin: 0; font-size: 1.1rem;">🛍️ Профиль покупателя</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <p style="color: #666; margin: 10px 0;">👋 Добро пожаловать в Dolce Deals!</p>
+                            <p style="color: #666; margin: 10px 0;">Здесь вы найдете товары от премиальных брендов со скидками до 70%</p>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden; margin-bottom: 20px;">
+                        <div style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+                            <h3 style="margin: 0; font-size: 1.1rem;">⚙️ Настройки</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                                <span>🔔 Уведомления</span>
+                                <span style="color: #28a745;">Включены</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0;">
+                                <span>🌍 Язык</span>
+                                <span style="color: #666;">Русский</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+                                <span>💰 Валюта</span>
+                                <span style="color: #666;">Рубли (₽)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: hidden;">
+                        <div style="padding: 20px; border-bottom: 1px solid #f0f0f0;">
+                            <h3 style="margin: 0; font-size: 1.1rem;">ℹ️ О приложении</h3>
+                        </div>
+                        <div style="padding: 20px;">
+                            <p style="color: #666; margin: 5px 0;"><strong>Dolce Deals</strong></p>
+                            <p style="color: #666; margin: 5px 0; font-size: 0.9rem;">Версия 2.0</p>
+                            <p style="color: #666; margin: 5px 0; font-size: 0.9rem;">Премиальная мода от ведущих брендов</p>
+                            <p style="color: #666; margin: 15px 0 5px 0; font-size: 0.8rem;">🏷️ Gucci • Off-White • Canada Goose • Chloé</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -354,7 +401,6 @@
                         this.products = products;
                         console.log(`✅ Загружено ${products.length} товаров`);
                         this.renderProducts();
-                        document.getElementById('apiStatus').textContent = `✅ API работает (${products.length} товаров)`;
                     } else {
                         throw new Error('Пустой массив товаров');
                     }
@@ -365,7 +411,7 @@
                         <p>API: ${this.apiBaseUrl}</p>
                         <button onclick="app.loadProducts()" style="padding: 10px 20px; margin-top: 10px;">Попробовать снова</button>
                     `;
-                    document.getElementById('apiStatus').textContent = `❌ API недоступен: ${error.message}`;
+                    console.error('API недоступен:', error.message);
                 }
             }
 
@@ -429,7 +475,6 @@
 
         function syncProducts() {
             if (window.app) {
-                document.getElementById('apiStatus').textContent = '🔄 Обновление...';
                 window.app.loadProducts();
             }
         }
